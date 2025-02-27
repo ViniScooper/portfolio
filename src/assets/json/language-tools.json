@@ -1,0 +1,42 @@
+[
+  {
+    "name": "HTML",
+    "url": "https://en.wikipedia.org/wiki/HTML"
+  },
+  {
+    "name": "CSS",
+    "url": "https://en.wikipedia.org/wiki/CSS"
+  },
+  {
+    "name": "JavaScript",
+    "url": "https://en.wikipedia.org/wiki/JavaScript"
+  },
+  {
+    "name": "TypeScript",
+    "url": "https://www.typescriptlang.org/"
+  },
+  {
+    "name": "Python",
+    "url": "https://www.python.org/"
+  },
+  {
+    "name": "PLSQL",
+    "url": "https://en.wikipedia.org/wiki/PL/SQL"
+  },
+  {
+    "name": "ADVPL",
+    "url": "https://en.wikipedia.org/wiki/ADVPL"
+  },
+  {
+    "name": "ABAP",
+    "url": "https://en.wikipedia.org/wiki/ABAP"
+  },
+  {
+    "name": "Laravel",
+    "url": "https://laravel.com/"
+  },
+  {
+    "name": "Angular",
+    "url": "https://angular.dev/"
+  }
+]
