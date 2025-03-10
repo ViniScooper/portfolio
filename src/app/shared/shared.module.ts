@@ -17,3 +17,7 @@ import { SimpleLogoComponent } from './components/logo/simple-logo.component';
   ]
 })
 export class SharedModule {}
+
+
+
+
