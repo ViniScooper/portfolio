@@ -13,13 +13,6 @@ import { Logo } from '@shared/components/logo/logo';
   <h1 class="text-brand-primary mb-3 mt-2 text-center text-3xl font-semibold tracking-tight lg:text-4xl lg:leading-snug dark:text-white">Uses</h1>
   <div class="flex flex-col gap-7">
     <h2 class="text-xl font-bold dark:text-white">Tech Stack:</h2>
-    <p class="dark:text-white text-black">
-      This website is created with Angular and Tailwind CSS. It's hosted on AWS
-      S3, and if you're curious, feel free to explore the source code on
-      <a class="underline" href="https://github.com//.es" target="_blank"
-        >GitHub</a
-      >.
-    </p>
     <ul class="flex flex-row py-5 gap-5">
       <li class="pr-5">
         <devicon name="Angular" cssClass="w-12 h-12"/>
@@ -52,25 +45,6 @@ import { Logo } from '@shared/components/logo/logo';
       <p class="bg-primary-700 p-4 text-white">700</p>
       <p class="bg-primary-800 p-4 text-white">800</p>
       <p class="bg-primary-900 p-4 text-white">900</p>
-    </div>
-
-    <h2 class="text-xl font-bold dark:text-white">Logo:</h2>
-    <p class="text-black dark:text-white">
-    
-    </p>
-    <div
-      class="grid grid-cols-1 sm:grid-cols-2 items-center place-items-center"
-    >
-      <div
-        class="flex flex-col items-center justify-center p-6 w-full border border-gray-500 text-center bg-white dark:bg-transparent"
-      >
-        <logo class="dark:text-white text-black"/>
-      </div>
-      <div
-        class="flex flex-col items-center justify-center p-6 w-full border dark:border-white border-black text-center bg-gray-900 dark:bg-white"
-      >
-        <logo class="dark:text-black text-white"/>
-      </div>
     </div>
     <h2 class="text-xl font-bold dark:text-white">Intro Image:</h2>
     <p class="text-black dark:text-white">I just found it here on <a class="underline" target="_blank" href="https://storyset.com/illustration/before-dawn/pana#utm_source=freepik&utm_medium=referall&utm_campaign=storiesdetail&utm_content=edit-button&utm_term=edit">storyset.com</a></p>
