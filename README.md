@@ -43,7 +43,3 @@ Before starting the application, you need to rename the files inside the [enviro
 
 Wait to compile and go to http://localhost:4200 after compile finish
 
-
-## Previous versions
-
-my previous versions of this website can be found at [/prev-websites](https://github.com//prev-websites)
