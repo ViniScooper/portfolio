@@ -17,7 +17,7 @@ import {
 } from 'lucide-react';
 
 const TechHero = () => {
-    const { language } = useLanguage();
+    const { language, toggleLanguage } = useLanguage();
     const heroT = translations[language].hero;
     const [showTerminal, setShowTerminal] = useState(false);
 
@@ -40,6 +40,23 @@ const TechHero = () => {
                             <span className="dot green"></span>
                         </div>
                         <span className="main-tech-badge">vini@cloud-ops ~</span>
+                        <button 
+                            onClick={toggleLanguage} 
+                            style={{
+                                background: 'rgba(255, 255, 255, 0.04)',
+                                border: '1px solid rgba(255, 255, 255, 0.1)',
+                                color: '#20d6c7',
+                                borderRadius: '4px',
+                                padding: '2px 7px',
+                                fontSize: '10px',
+                                cursor: 'pointer',
+                                fontWeight: 700,
+                                fontFamily: 'monospace'
+                            }}
+                            title="Alternar Idioma / Switch Language"
+                        >
+                            {language.toUpperCase()}
+                        </button>
                     </div>
 
                     <div className="main-tech-body">

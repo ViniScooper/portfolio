@@ -1069,12 +1069,13 @@ h4 {
    TECH HERO (MINIMALIST CENTERED CARD)
    ======================================================== */
 .tech-hero-section {
-  min-height: 88vh;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 4rem 1.5rem;
+  padding: 2rem 1.5rem;
   position: relative;
+  background: #04080a;
 }
 
 .tech-hero-container {
