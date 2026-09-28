@@ -1293,7 +1293,7 @@ h4 {
    ======================================================== */
 .terminal-fullscreen-window {
   width: 100%;
-  max-width: 820px;
+  max-width: 950px;
   background: #04080a;
   border: 1px solid rgba(32, 214, 199, 0.4);
   border-radius: 12px;
@@ -1662,14 +1662,14 @@ h4 {
   padding: 0.65rem 1.25rem;
   background: #060b0d;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
 
 .terminal-bottom-actions-group {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
 
 @media (max-width: 720px) {

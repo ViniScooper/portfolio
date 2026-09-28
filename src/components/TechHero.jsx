@@ -449,7 +449,7 @@ const TechHero = () => {
 
                     <div className="terminal-bottom-bar">
                         <button className="terminal-btn-sm secondary" onClick={() => setView('card')}>
-                            <ArrowLeft size={14} /> {language === 'pt' ? 'Voltar ao Console' : 'Back to Console'}
+                            <ArrowLeft size={14} /> {language === 'pt' ? 'Voltar' : 'Back'}
                         </button>
                         <button className="terminal-btn-sm primary" onClick={() => setView('terminal_project')}>
                             <Radio size={14} /> {language === 'pt' ? 'Ver CloudOps Hub' : 'Inspect CloudOps Hub'} <ArrowRight size={14} />
@@ -578,7 +578,7 @@ const TechHero = () => {
                     {/* Barra de Ações Compacta do Terminal */}
                     <div className="terminal-bottom-bar">
                         <button className="terminal-btn-sm secondary" onClick={() => setView('card')}>
-                            <ArrowLeft size={14} /> {language === 'pt' ? 'Voltar ao Console' : 'Back'}
+                            <ArrowLeft size={14} /> {language === 'pt' ? 'Voltar' : 'Back'}
                         </button>
                         
                         <div className="terminal-bottom-actions-group">
@@ -589,7 +589,7 @@ const TechHero = () => {
                                 className="terminal-btn-sm secondary"
                                 title="Pitch no TabNews"
                             >
-                                <Newspaper size={14} /> {language === 'pt' ? 'Artigo no TabNews' : 'TabNews Pitch'} ➔
+                                <Newspaper size={14} /> {language === 'pt' ? 'TabNews ➔' : 'TabNews Pitch ➔'}
                             </a>
                             <a 
                                 href="https://github.com/ViniScooper/CloudOps_Hub" 
@@ -597,7 +597,7 @@ const TechHero = () => {
                                 rel="noopener noreferrer" 
                                 className="terminal-btn-sm secondary"
                             >
-                                <Github size={14} /> GitHub Code
+                                <Github size={14} /> GitHub
                             </a>
                             <a 
                                 href="https://cloudops-hub-dun.vercel.app/" 
@@ -605,7 +605,7 @@ const TechHero = () => {
                                 rel="noopener noreferrer" 
                                 className="terminal-btn-sm primary"
                             >
-                                <ExternalLink size={14} /> {language === 'pt' ? 'verificar site no ar' : 'check live site'} ➔
+                                <ExternalLink size={14} /> {language === 'pt' ? 'site no ar ➔' : 'check live site ➔'}
                             </a>
                         </div>
                     </div>
