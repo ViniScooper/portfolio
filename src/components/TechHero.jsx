@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import { 
   Terminal, 
@@ -286,6 +286,44 @@ const TechHero = () => {
         setCurrentImageIdx((prev) => (prev - 1 + cloudHubSlides.length) % cloudHubSlides.length);
     };
 
+    // Animação de contagem dos números na aba Sobre Mim
+    const [animatedYears, setAnimatedYears] = useState(0);
+    const [animatedDbs, setAnimatedDbs] = useState(0);
+    const [animatedUptime, setAnimatedUptime] = useState('0.0');
+
+    useEffect(() => {
+        if (view === 'terminal_about') {
+            setAnimatedYears(0);
+            setAnimatedDbs(0);
+            setAnimatedUptime('0.0');
+
+            const start = performance.now();
+            const duration = 1200; // 1.2s duração da contagem
+
+            const frame = (now) => {
+                const elapsed = now - start;
+                const progress = Math.min(elapsed / duration, 1);
+                // Curva de desaceleração suave (ease out cubic)
+                const ease = 1 - Math.pow(1 - progress, 3);
+
+                setAnimatedYears(Math.floor(ease * 5));
+                setAnimatedDbs(Math.floor(ease * 50));
+                setAnimatedUptime((ease * 99.9).toFixed(1));
+
+                if (progress < 1) {
+                    requestAnimationFrame(frame);
+                } else {
+                    setAnimatedYears(5);
+                    setAnimatedDbs(50);
+                    setAnimatedUptime('99.9');
+                }
+            };
+
+            const reqId = requestAnimationFrame(frame);
+            return () => cancelAnimationFrame(reqId);
+        }
+    }, [view]);
+
     const currentSlide = cloudHubSlides[currentImageIdx];
     const slideDetails = language === 'pt' ? currentSlide.detailsPt : currentSlide.detailsEn;
 
@@ -423,22 +461,23 @@ const TechHero = () => {
                     <div className="terminal-console-content">
                         <div className="terminal-cli-prompt">
                             <span className="prompt-green">vini@cloud-ops</span>:<span className="prompt-blue">~</span>$ <span className="prompt-white">cat sobre_mim.md</span>
+                            <span className="terminal-cursor-blink">▮</span>
                         </div>
 
                         <div className="terminal-text-flow">
-                            <p className="terminal-highlight-line">
+                            <p className="terminal-highlight-line terminal-anim-step-1">
                                 {language === 'pt' 
                                     ? '👋 Olá! Sou José Vinicius, Database & Cloud Ops Engineer.'
                                     : '👋 Hello! I am José Vinicius, Database & Cloud Ops Engineer.'}
                             </p>
                             
-                            <p>
+                            <p className="terminal-anim-step-2">
                                 {language === 'pt'
                                     ? 'Atuo há mais de 5 anos desenvolvendo e administrando ambientes de missão crítica. Minha especialidade combina a solidez e consistência de bancos relacionais corporativos (Oracle Autonomous ATP, PL/SQL, PostgreSQL, MySQL) com a resiliência e agilidade de infraestruturas modernas (Docker, Linux SRE, Nuvem OCI/AWS, automação CI/CD e redes seguras via Cloudflare Zero Trust).'
                                     : 'I have over 5 years of hands-on experience architecting and maintaining mission-critical environments. My expertise bridges enterprise relational databases (Oracle Autonomous ATP, PL/SQL, PostgreSQL, MySQL) with modern cloud-native resilience (Docker, Linux SRE, OCI/AWS Cloud, CI/CD automation, and secure networking via Cloudflare Zero Trust).'}
                             </p>
 
-                            <div className="terminal-code-box">
+                            <div className="terminal-code-box terminal-anim-step-3">
                                 <div className="terminal-code-header">
                                     <Cpu size={15} style={{ color: '#20d6c7' }} />
                                     <strong style={{ color: '#20d6c7' }}>
@@ -452,17 +491,17 @@ const TechHero = () => {
                                 </p>
                             </div>
 
-                            <div className="terminal-metrics-cards">
+                            <div className="terminal-metrics-cards terminal-anim-step-4">
                                 <div className="terminal-mcard">
-                                    <span className="mcard-val">5+</span>
+                                    <span className="mcard-val">{animatedYears}+</span>
                                     <span className="mcard-lbl">{language === 'pt' ? 'Anos com Tecnologia & Dados' : 'Years with Tech & Data'}</span>
                                 </div>
                                 <div className="terminal-mcard">
-                                    <span className="mcard-val">50+</span>
+                                    <span className="mcard-val">{animatedDbs}+</span>
                                     <span className="mcard-lbl">{language === 'pt' ? 'Bancos Otimizados' : 'Optimized Databases'}</span>
                                 </div>
                                 <div className="terminal-mcard">
-                                    <span className="mcard-val">99.9%</span>
+                                    <span className="mcard-val">{animatedUptime}%</span>
                                     <span className="mcard-lbl">{language === 'pt' ? 'Disponibilidade em Prod' : 'Production Uptime'}</span>
                                 </div>
                             </div>

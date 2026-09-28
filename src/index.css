@@ -1388,6 +1388,46 @@ h4 {
   gap: 0.5rem;
 }
 
+/* ANIMAÇÕES DO TERMINAL SOBRE MIM */
+.terminal-cursor-blink {
+  display: inline-block;
+  margin-left: 5px;
+  color: #20d6c7;
+  font-weight: 700;
+  animation: cursorBlink 0.9s infinite;
+}
+
+@keyframes cursorBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.terminal-anim-step-1 {
+  animation: terminalFadeIn 0.3s ease-out both;
+}
+
+.terminal-anim-step-2 {
+  animation: terminalFadeIn 0.4s ease-out 0.12s both;
+}
+
+.terminal-anim-step-3 {
+  animation: terminalSlideUp 0.45s ease-out 0.22s both;
+}
+
+.terminal-anim-step-4 {
+  animation: terminalSlideUp 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.32s both;
+}
+
+@keyframes terminalFadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes terminalSlideUp {
+  from { opacity: 0; transform: translateY(14px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
 .terminal-metrics-cards {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -1396,18 +1436,31 @@ h4 {
 }
 
 .terminal-mcard {
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(32, 214, 199, 0.03);
+  border: 1px solid rgba(32, 214, 199, 0.2);
   border-radius: 8px;
-  padding: 0.75rem;
+  padding: 0.85rem 0.6rem;
   text-align: center;
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.terminal-mcard:hover {
+  border-color: #20d6c7;
+  background: rgba(32, 214, 199, 0.08);
+  box-shadow: 0 4px 20px rgba(32, 214, 199, 0.22);
+  transform: translateY(-2px);
 }
 
 .mcard-val {
   display: block;
-  font-size: 1.4rem;
+  font-size: 1.55rem;
   font-weight: 800;
   color: #20d6c7;
+  text-shadow: 0 0 14px rgba(32, 214, 199, 0.5);
+  font-family: 'Consolas', monospace;
+  letter-spacing: -0.02em;
 }
 
 .mcard-lbl {
@@ -1415,7 +1468,8 @@ h4 {
   color: #9ca3af;
   text-transform: uppercase;
   display: block;
-  margin-top: 2px;
+  margin-top: 4px;
+  letter-spacing: 0.04em;
 }
 
 /* PROJETO CLOUDOPS NO TERMINAL */
