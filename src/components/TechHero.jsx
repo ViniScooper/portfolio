@@ -306,13 +306,24 @@ const TechHero = () => {
                         <span className="terminal-title-text">vini@cloud-ops: ~</span>
                         
                         {/* Seletor de Idioma Bilíngue em Destaque */}
-                        <button 
-                            onClick={toggleLanguage} 
-                            className="terminal-lang-btn"
-                            title={language === 'pt' ? 'Switch to English' : 'Mudar para Português'}
-                        >
-                            <Globe size={11} /> {language === 'pt' ? 'PT | EN' : 'EN | PT'}
-                        </button>
+                        <div className="terminal-lang-switch-group" role="group" aria-label="Idioma / Language">
+                            <button 
+                                type="button"
+                                onClick={() => language !== 'pt' && toggleLanguage()} 
+                                className={`terminal-lang-pill ${language === 'pt' ? 'active' : ''}`}
+                                title="Mudar para Português"
+                            >
+                                🇧🇷 PT
+                            </button>
+                            <button 
+                                type="button"
+                                onClick={() => language !== 'en' && toggleLanguage()} 
+                                className={`terminal-lang-pill ${language === 'en' ? 'active' : ''}`}
+                                title="Switch to English"
+                            >
+                                🇺🇸 EN
+                            </button>
+                        </div>
                     </div>
 
                     {/* Conteúdo do Card Retangular */}
@@ -385,13 +396,24 @@ const TechHero = () => {
                         </div>
                         <span className="terminal-title-text">bash - vini@cloud-ops: ~/sobre_mim.md</span>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                            <button 
-                                onClick={toggleLanguage} 
-                                className="terminal-lang-btn"
-                                title={language === 'pt' ? 'Switch to English' : 'Mudar para Português'}
-                            >
-                                <Globe size={11} /> {language.toUpperCase()}
-                            </button>
+                            <div className="terminal-lang-switch-group" role="group" aria-label="Idioma / Language">
+                                <button 
+                                    type="button"
+                                    onClick={() => language !== 'pt' && toggleLanguage()} 
+                                    className={`terminal-lang-pill ${language === 'pt' ? 'active' : ''}`}
+                                    title="Mudar para Português"
+                                >
+                                    🇧🇷 PT
+                                </button>
+                                <button 
+                                    type="button"
+                                    onClick={() => language !== 'en' && toggleLanguage()} 
+                                    className={`terminal-lang-pill ${language === 'en' ? 'active' : ''}`}
+                                    title="Switch to English"
+                                >
+                                    🇺🇸 EN
+                                </button>
+                            </div>
                             <button className="terminal-close-action" onClick={() => setView('card')}>
                                 <X size={16} />
                             </button>
@@ -471,13 +493,24 @@ const TechHero = () => {
                         </div>
                         <span className="terminal-title-text">bash - vini@cloud-ops: ~/projects/cloudops-hub (main)</span>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                            <button 
-                                onClick={toggleLanguage} 
-                                className="terminal-lang-btn"
-                                title={language === 'pt' ? 'Switch to English' : 'Mudar para Português'}
-                            >
-                                <Globe size={11} /> {language.toUpperCase()}
-                            </button>
+                            <div className="terminal-lang-switch-group" role="group" aria-label="Idioma / Language">
+                                <button 
+                                    type="button"
+                                    onClick={() => language !== 'pt' && toggleLanguage()} 
+                                    className={`terminal-lang-pill ${language === 'pt' ? 'active' : ''}`}
+                                    title="Mudar para Português"
+                                >
+                                    🇧🇷 PT
+                                </button>
+                                <button 
+                                    type="button"
+                                    onClick={() => language !== 'en' && toggleLanguage()} 
+                                    className={`terminal-lang-pill ${language === 'en' ? 'active' : ''}`}
+                                    title="Switch to English"
+                                >
+                                    🇺🇸 EN
+                                </button>
+                            </div>
                             <button className="terminal-close-action" onClick={() => setView('card')}>
                                 <X size={16} />
                             </button>
