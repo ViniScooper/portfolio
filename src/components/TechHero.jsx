@@ -8,16 +8,24 @@ import {
   Github, 
   Linkedin, 
   ArrowRight, 
-  ArrowLeft,
+  ArrowLeft, 
   User, 
   X, 
-  ExternalLink,
-  Cpu,
-  ChevronLeft,
-  ChevronRight,
-  Radio,
-  Newspaper,
-  Globe
+  ExternalLink, 
+  Cpu, 
+  ChevronLeft, 
+  ChevronRight, 
+  Radio, 
+  Newspaper, 
+  Globe, 
+  Download, 
+  Mail, 
+  Phone, 
+  MapPin, 
+  Activity, 
+  ShieldCheck, 
+  Layers, 
+  Send 
 } from 'lucide-react';
 
 const cloudHubSlides = [
@@ -277,20 +285,38 @@ const TechHero = () => {
     // 'card' | 'terminal_about' | 'terminal_project'
     const [view, setView] = useState('card');
     const [currentImageIdx, setCurrentImageIdx] = useState(0);
+    const [showArchitecture, setShowArchitecture] = useState(false);
 
-    const nextImage = () => {
-        setCurrentImageIdx((prev) => (prev + 1) % cloudHubSlides.length);
-    };
-
-    const prevImage = () => {
-        setCurrentImageIdx((prev) => (prev - 1 + cloudHubSlides.length) % cloudHubSlides.length);
-    };
+    // Interactive CLI State
+    const [cliInput, setCliInput] = useState('');
+    const [cliOutput, setCliOutput] = useState(null);
 
     // Animação de contagem dos números na aba Sobre Mim
     const [animatedYears, setAnimatedYears] = useState(0);
     const [animatedDbs, setAnimatedDbs] = useState(0);
     const [animatedUptime, setAnimatedUptime] = useState('0.0');
 
+    // Atalhos Globais de Teclado (ESC: Voltar, Setas: Navegar, L: Idioma)
+    useEffect(() => {
+        const handleKeyDown = (e) => {
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+            if (e.key === 'Escape') {
+                setView('card');
+                setShowArchitecture(false);
+            } else if (e.key === 'ArrowRight' && view === 'terminal_project' && !showArchitecture) {
+                setCurrentImageIdx((prev) => (prev + 1) % cloudHubSlides.length);
+            } else if (e.key === 'ArrowLeft' && view === 'terminal_project' && !showArchitecture) {
+                setCurrentImageIdx((prev) => (prev - 1 + cloudHubSlides.length) % cloudHubSlides.length);
+            } else if (e.key.toLowerCase() === 'l') {
+                toggleLanguage();
+            }
+        };
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, [view, showArchitecture, toggleLanguage]);
+
+    // Animação Count-up Sobre Mim
     useEffect(() => {
         if (view === 'terminal_about') {
             setAnimatedYears(0);
@@ -298,12 +324,11 @@ const TechHero = () => {
             setAnimatedUptime('0.0');
 
             const start = performance.now();
-            const duration = 1200; // 1.2s duração da contagem
+            const duration = 1200;
 
             const frame = (now) => {
                 const elapsed = now - start;
                 const progress = Math.min(elapsed / duration, 1);
-                // Curva de desaceleração suave (ease out cubic)
                 const ease = 1 - Math.pow(1 - progress, 3);
 
                 setAnimatedYears(Math.floor(ease * 5));
@@ -324,6 +349,78 @@ const TechHero = () => {
         }
     }, [view]);
 
+    const nextImage = () => {
+        setShowArchitecture(false);
+        setCurrentImageIdx((prev) => (prev + 1) % cloudHubSlides.length);
+    };
+
+    const prevImage = () => {
+        setShowArchitecture(false);
+        setCurrentImageIdx((prev) => (prev - 1 + cloudHubSlides.length) % cloudHubSlides.length);
+    };
+
+    // Processador de Comandos CLI
+    const executeCliCommand = (cmdStr) => {
+        const cleanCmd = cmdStr.trim().toLowerCase();
+        if (!cleanCmd) return;
+
+        if (cleanCmd === 'clear' || cleanCmd === 'cls') {
+            setCliOutput(null);
+            setCliInput('');
+            return;
+        }
+
+        if (cleanCmd === 'help') {
+            setCliOutput(
+                language === 'pt'
+                    ? "Comandos disponíveis:\n• whoami       -> Ver perfil profissional\n• projects     -> Abrir projeto CloudOps Hub\n• about        -> Ler sobre trajetória e carreira\n• arch         -> Visualizar arquitetura do sistema\n• cv (ou curl) -> Baixar currículo em PDF (EN)\n• contact      -> Canais de contato direto\n• clear        -> Limpar saída"
+                    : "Available commands:\n• whoami       -> View professional profile\n• projects     -> Inspect CloudOps Hub project\n• about        -> Read career background\n• arch         -> View system architecture diagram\n• cv (or curl) -> Download resume in PDF (EN)\n• contact      -> Direct contact channels\n• clear        -> Clear output"
+            );
+        } else if (cleanCmd === 'whoami') {
+            setCliOutput(
+                language === 'pt'
+                    ? "José Vinícius Lourenço — Database Administrator & Cloud Infrastructure\n• 5+ anos com bancos de missão crítica (Oracle ATP, MongoDB, SQL Server)\n• Engenharia de Confiabilidade (Linux SRE, Docker, OCI, Python & Bash)\n• Criador do CloudOps Hub — Console de Gestão Multi-Cloud com IA"
+                    : "José Vinícius Lourenço — Database Administrator & Cloud Infrastructure\n• 5+ years managing mission-critical databases (Oracle ATP, MongoDB, SQL Server)\n• Site Reliability Engineering (Linux SRE, Docker, OCI, Python & Bash)\n• Creator of CloudOps Hub — Multi-Cloud DevOps Control Plane with AI"
+            );
+        } else if (cleanCmd === 'projects' || cleanCmd === 'cloudops') {
+            setView('terminal_project');
+            setShowArchitecture(false);
+            setCliOutput(language === 'pt' ? "Abrindo CloudOps Hub..." : "Opening CloudOps Hub...");
+        } else if (cleanCmd === 'about' || cleanCmd === 'cat') {
+            setView('terminal_about');
+            setCliOutput(language === 'pt' ? "Abrindo sobre_mim.md..." : "Opening sobre_mim.md...");
+        } else if (cleanCmd === 'arch' || cleanCmd === 'architecture') {
+            setView('terminal_project');
+            setShowArchitecture(true);
+            setCliOutput(language === 'pt' ? "Exibindo diagrama de arquitetura..." : "Displaying architecture diagram...");
+        } else if (cleanCmd.includes('cv') || cleanCmd.includes('curl') || cleanCmd.includes('pdf')) {
+            window.open('/curriculo_en.pdf', '_blank');
+            setCliOutput(language === 'pt' ? "Iniciando download de curriculo_en.pdf..." : "Downloading curriculo_en.pdf...");
+        } else if (cleanCmd === 'contact' || cleanCmd === 'email') {
+            setCliOutput(
+                `José Vinícius Lourenço\n• E-mail: vviniciuslourenco@gmail.com\n• WhatsApp: +55 81 99512-6839\n• LinkedIn: linkedin.com/in/jose-vinicius-lourenço-1a6b9014a/\n• Local: Recife, PE, Brasil (Disponível para Trabalho Remoto Global)`
+            );
+        } else if (cleanCmd.startsWith('sudo')) {
+            setCliOutput(
+                language === 'pt'
+                    ? "bash: sudo: permissão negada. Este nó está sob guarda e monitoramento ativo 24/7 pelo SRE Watchdog 🛡️"
+                    : "bash: sudo: permission denied. This cluster is under 24/7 active SRE Watchdog protection 🛡️"
+            );
+        } else {
+            setCliOutput(
+                language === 'pt'
+                    ? `bash: comando não encontrado: "${cleanCmd}". Digite "help" para ver a lista de comandos.`
+                    : `bash: command not found: "${cleanCmd}". Type "help" to see available commands.`
+            );
+        }
+        setCliInput('');
+    };
+
+    const handleFormSubmit = (e) => {
+        e.preventDefault();
+        executeCliCommand(cliInput);
+    };
+
     const currentSlide = cloudHubSlides[currentImageIdx];
     const slideDetails = language === 'pt' ? currentSlide.detailsPt : currentSlide.detailsEn;
 
@@ -341,9 +438,9 @@ const TechHero = () => {
                             <span className="dot yellow"></span>
                             <span className="dot green"></span>
                         </div>
-                        <span className="terminal-title-text">vini@cloud-ops: ~</span>
+                        <span className="terminal-title-text">vini@cloud-ops: ~ (Recife, PE)</span>
                         
-                        {/* Seletor de Idioma Bilíngue em Destaque */}
+                        {/* Seletor de Idioma Bilíngue Segmentado */}
                         <div className="terminal-lang-switch-group" role="group" aria-label="Idioma / Language">
                             <button 
                                 type="button"
@@ -371,35 +468,127 @@ const TechHero = () => {
                                 <Terminal size={28} />
                             </div>
                             <div className="terminal-rect-headings">
-                                <h1 className="terminal-user-name">Vinicius</h1>
-                                <p className="terminal-user-role">Database & Cloud Ops Engineer</p>
+                                <h1 className="terminal-user-name">José Vinícius Lourenço</h1>
+                                <p className="terminal-user-role">
+                                    {language === 'pt' 
+                                        ? 'Database Administrator | Cloud Infrastructure | MongoDB & Relational DBs'
+                                        : 'Database Administrator | Cloud Infrastructure | MongoDB & Relational DBs'}
+                                </p>
                             </div>
                         </div>
 
                         {/* Badges de Especialidade */}
                         <div className="terminal-tags-row">
-                            <span className="terminal-pill"><Database size={12} /> Oracle ATP / PL-SQL</span>
-                            <span className="terminal-pill"><Server size={12} /> Docker & Linux SRE</span>
-                            <span className="terminal-pill"><Cloud size={12} /> OCI / Cloudflare</span>
+                            <span className="terminal-pill"><Database size={12} /> Oracle ATP / 19c</span>
+                            <span className="terminal-pill"><Database size={12} /> MongoDB & SQL Server</span>
+                            <span className="terminal-pill"><Server size={12} /> Linux SRE & Docker</span>
+                            <span className="terminal-pill"><Cloud size={12} /> OCI & Cloudflare</span>
                         </div>
 
-                        {/* Status de Disponibilidade */}
+                        {/* Status de Disponibilidade & Região */}
                         <div className="terminal-status-row">
                             <span className="pulse-green"></span>
-                            <span>{language === 'pt' ? 'Disponível para oportunidades remotas globais' : 'Available for global remote opportunities'}</span>
+                            <span>{language === 'pt' ? 'Disponível para contratação e projetos remotos globais' : 'Available for global remote employment and contracts'}</span>
                         </div>
 
-                        {/* Redes Sociais */}
+                        {/* Telemetria SRE ao Vivo */}
+                        <div className="terminal-live-status-bar">
+                            <div className="status-item">
+                                <span className="pulse-green"></span>
+                                <span className="status-label">SYS:</span>
+                                <strong className="status-value-ok">NOMINAL</strong>
+                            </div>
+                            <div className="status-item">
+                                <MapPin size={11} className="status-icon" />
+                                <span className="status-label">{language === 'pt' ? 'LOCAL' : 'LOC'}:</span>
+                                <span className="status-value-cyan">Recife, BR</span>
+                            </div>
+                            <div className="status-item">
+                                <Activity size={11} className="status-icon" />
+                                <span className="status-label">LAT:</span>
+                                <span className="status-value-cyan">18ms</span>
+                            </div>
+                            <div className="status-item">
+                                <ShieldCheck size={11} className="status-icon" />
+                                <span className="status-label">UPTIME:</span>
+                                <span className="status-value-ok">99.98%</span>
+                            </div>
+                        </div>
+
+                        {/* Redes Sociais & Download do CV */}
                         <div className="terminal-socials-row">
-                            <a href="https://github.com/ViniScooper" target="_blank" rel="noopener noreferrer" title="GitHub" className="terminal-social-link">
-                                <Github size={18} /> <span>GitHub</span>
+                            <a 
+                                href="https://github.com/ViniScooper" 
+                                target="_blank" 
+                                rel="noopener noreferrer" 
+                                title="GitHub" 
+                                className="terminal-social-link"
+                            >
+                                <Github size={16} /> <span>GitHub</span>
                             </a>
-                            <a href="https://linkedin.com/in/vini-scooper" target="_blank" rel="noopener noreferrer" title="LinkedIn" className="terminal-social-link">
-                                <Linkedin size={18} /> <span>LinkedIn</span>
+                            <a 
+                                href="https://linkedin.com/in/jose-vinicius-louren%C3%A7o-1a6b9014a/" 
+                                target="_blank" 
+                                rel="noopener noreferrer" 
+                                title="LinkedIn" 
+                                className="terminal-social-link"
+                            >
+                                <Linkedin size={16} /> <span>LinkedIn</span>
+                            </a>
+                            <a 
+                                href="https://wa.me/5581995126839" 
+                                target="_blank" 
+                                rel="noopener noreferrer" 
+                                title="WhatsApp" 
+                                className="terminal-social-link"
+                            >
+                                <Phone size={15} /> <span>WhatsApp</span>
+                            </a>
+                            <a 
+                                href="/curriculo_en.pdf" 
+                                download="Jose_Vinicius_Lourenco_Resume.pdf"
+                                title="Download Resume / Baixar CV" 
+                                className="terminal-social-link cv-highlight"
+                            >
+                                <Download size={15} /> <span>curl cv.pdf</span>
                             </a>
                         </div>
 
-                        {/* Ações: Sobre Mim & Ver Projetos */}
+                        {/* CLI Interativo com Chips de Comandos */}
+                        <div className="terminal-interactive-cli">
+                            <form onSubmit={handleFormSubmit} className="terminal-cli-form">
+                                <span className="prompt-green">vini@recife</span>:<span className="prompt-blue">~</span>$&nbsp;
+                                <input 
+                                    type="text" 
+                                    value={cliInput}
+                                    onChange={(e) => setCliInput(e.target.value)}
+                                    placeholder={language === 'pt' ? 'Digite "help", "whoami", "cv", "projects"...' : 'Type "help", "whoami", "cv", "projects"...'}
+                                    className="terminal-cli-input"
+                                />
+                                <button type="submit" style={{ background: 'none', border: 'none', color: '#20d6c7', cursor: 'pointer', padding: 0 }} title="Executar">
+                                    <Send size={14} />
+                                </button>
+                            </form>
+
+                            {/* Chips Rápidos de Comandos */}
+                            <div className="terminal-cmd-chips">
+                                <span className="terminal-cmd-chip-label">{language === 'pt' ? 'Atalhos:' : 'Quick:'}</span>
+                                <button type="button" className="terminal-cmd-chip" onClick={() => executeCliCommand('help')}>help</button>
+                                <button type="button" className="terminal-cmd-chip" onClick={() => executeCliCommand('whoami')}>whoami</button>
+                                <button type="button" className="terminal-cmd-chip" onClick={() => executeCliCommand('cv')}>curl cv.pdf</button>
+                                <button type="button" className="terminal-cmd-chip" onClick={() => executeCliCommand('contact')}>contact</button>
+                                <button type="button" className="terminal-cmd-chip" onClick={() => executeCliCommand('arch')}>arch</button>
+                            </div>
+
+                            {/* Saída do Comando */}
+                            {cliOutput && (
+                                <div className="terminal-cli-response">
+                                    {cliOutput}
+                                </div>
+                            )}
+                        </div>
+
+                        {/* Ações Principais: Sobre Mim & Ver Projetos */}
                         <div className="terminal-actions-grid">
                             <button 
                                 className="terminal-btn secondary"
@@ -410,7 +599,10 @@ const TechHero = () => {
                             </button>
                             <button 
                                 className="terminal-btn primary"
-                                onClick={() => setView('terminal_project')}
+                                onClick={() => {
+                                    setView('terminal_project');
+                                    setShowArchitecture(false);
+                                }}
                             >
                                 <Radio size={15} />
                                 {language === 'pt' ? 'Ver Projetos' : 'View Projects'}
@@ -418,11 +610,17 @@ const TechHero = () => {
                             </button>
                         </div>
                     </div>
+
+                    {/* Dica de Teclado no Rodapé */}
+                    <div className="terminal-hotkey-hints">
+                        <span><span className="hotkey-badge">L</span> {language === 'pt' ? 'Alternar Idioma' : 'Toggle Language'}</span>
+                        <span><span className="hotkey-badge">ESC</span> {language === 'pt' ? 'Fechar/Voltar' : 'Close/Back'}</span>
+                    </div>
                 </div>
             )}
 
             {/* ===================================================
-                VISÃO 2: TERMINAL SOBRE MIM
+                VISÃO 2: TERMINAL SOBRE MIM (TRAJETÓRIA & EXPERIÊNCIA)
                =================================================== */}
             {view === 'terminal_about' && (
                 <div className="terminal-fullscreen-window fade-in">
@@ -467,16 +665,46 @@ const TechHero = () => {
                         <div className="terminal-text-flow">
                             <p className="terminal-highlight-line terminal-anim-step-1">
                                 {language === 'pt' 
-                                    ? '👋 Olá! Sou José Vinicius, Database & Cloud Ops Engineer.'
-                                    : '👋 Hello! I am José Vinicius, Database & Cloud Ops Engineer.'}
+                                    ? '👋 Olá! Sou José Vinícius Lourenço, Database Administrator & Cloud Infrastructure Engineer.'
+                                    : '👋 Hello! I am José Vinícius Lourenço, Database Administrator & Cloud Infrastructure Engineer.'}
                             </p>
                             
                             <p className="terminal-anim-step-2">
                                 {language === 'pt'
-                                    ? 'Atuo há mais de 5 anos desenvolvendo e administrando ambientes de missão crítica. Minha especialidade combina a solidez e consistência de bancos relacionais corporativos (Oracle Autonomous ATP, PL/SQL, PostgreSQL, MySQL) com a resiliência e agilidade de infraestruturas modernas (Docker, Linux SRE, Nuvem OCI/AWS, automação CI/CD e redes seguras via Cloudflare Zero Trust).'
-                                    : 'I have over 5 years of hands-on experience architecting and maintaining mission-critical environments. My expertise bridges enterprise relational databases (Oracle Autonomous ATP, PL/SQL, PostgreSQL, MySQL) with modern cloud-native resilience (Docker, Linux SRE, OCI/AWS Cloud, CI/CD automation, and secure networking via Cloudflare Zero Trust).'}
+                                    ? 'Atuo há mais de 5 anos gerenciando ambientes de banco de dados de missão crítica em produção em tecnologias relacionais e NoSQL (Oracle 19c/21c/ATP, Microsoft SQL Server, MongoDB e MySQL). Especialista em estratégias de Backup & Disaster Recovery, tuning fino de performance, otimização de consultas e planos de execução, além de automação de rotinas operacionais e CI/CD com Python e Shell Scripting.'
+                                    : 'I have over 5 years of experience managing mission-critical production database environments across relational and NoSQL engines (Oracle 19c/21c/ATP, Microsoft SQL Server, MongoDB, and MySQL). Specialized in backup & disaster recovery, performance tuning, query optimization, and automating operational routines and CI/CD with Python and Shell Scripting.'}
                             </p>
 
+                            {/* Timeline de Experiência Profissional Real */}
+                            <div className="terminal-career-timeline terminal-anim-step-2">
+                                <div className="career-item">
+                                    <div className="career-header">
+                                        <span className="career-role">Database Administrator</span>
+                                        <span className="career-company">In Forma Software</span>
+                                        <span className="career-period">Jul 2024 — Presente</span>
+                                    </div>
+                                    <p className="career-desc">
+                                        {language === 'pt'
+                                            ? 'Administração de ambientes de banco de missão crítica com alta disponibilidade, estratégias de backup/restore e disaster recovery, análise de execution plans, tuning de queries e automação de tarefas CI/CD com Python e Shell Scripting.'
+                                            : 'Administering mission-critical production databases ensuring high availability, robust backup/disaster recovery strategies, advanced performance tuning, execution plan analysis, and CI/CD automation with Python and Shell.'}
+                                    </p>
+                                </div>
+
+                                <div className="career-item">
+                                    <div className="career-header">
+                                        <span className="career-role">Database Administrator & Data Analyst</span>
+                                        <span className="career-company">Cod.ERP Tecnologia LTDA</span>
+                                        <span className="career-period">Mai 2023 — Mai 2024</span>
+                                    </div>
+                                    <p className="career-desc">
+                                        {language === 'pt'
+                                            ? 'Administração de bases Microsoft SQL Server para ERPs corporativos de grande porte, index tuning, queries complexas, segurança e rotinas analíticas para tomada de decisão.'
+                                            : 'Administered Microsoft SQL Server for enterprise ERPs, index tuning, complex SQL query optimization, database security, and business data analytics.'}
+                                    </p>
+                                </div>
+                            </div>
+
+                            {/* Destaque do Projeto Flagship */}
                             <div className="terminal-code-box terminal-anim-step-3">
                                 <div className="terminal-code-header">
                                     <Cpu size={15} style={{ color: '#20d6c7' }} />
@@ -486,11 +714,12 @@ const TechHero = () => {
                                 </div>
                                 <p style={{ color: '#cbd5e1', fontSize: '0.85rem', lineHeight: '1.6', margin: '6px 0 0' }}>
                                     {language === 'pt'
-                                        ? 'Cansado do gargalo operacional de abrir 10+ painéis isolados (Oracle Cloud, AWS, Hostinger, Vercel, Cloudflare e terminais SSH dispersos), concebi e arquitetei o CloudOps Hub: um "Single Pane of Glass" para operações multi-cloud. Nele implementei arquitetura Zero-Agent via SSH2, sondas de auto-healing ativas que recuperam containers caídos e alertam via WhatsApp, e persistência de telemetria analítica no Oracle Autonomous Database (ATP Always Free) via ORDS REST API — garantindo observabilidade corporativa com consumo inferior a 50 MB de RAM.'
-                                        : 'Frustrated by the operational overhead of managing 10+ disconnected dashboards (Oracle Cloud, AWS, Hostinger, Vercel, Cloudflare, and scattered SSH windows), I designed and built CloudOps Hub: a unified "Single Pane of Glass" for multi-cloud operations. It features Zero-Agent management over SSH2, active auto-healing probes with WhatsApp alerts, and analytical telemetry persisted in Oracle Autonomous Database (ATP Always Free) via ORDS REST API — achieving enterprise-grade observability with under 50 MB RAM host overhead.'}
+                                        ? 'Cansado de abrir 10+ painéis dispersos (Oracle Cloud, AWS, Hostinger, Vercel, Cloudflare e terminais SSH), concebi e arquitetei o CloudOps Hub: um "Single Pane of Glass" para operações multi-cloud. Implementei arquitetura Zero-Agent via SSH2, sondas de auto-healing ativas que recuperam containers caídos e alertam via WhatsApp, além de persistência de telemetria no Oracle Autonomous Database (ATP Always Free) via ORDS REST API — com consumo inferior a 50 MB de RAM.'
+                                        : 'Frustrated by juggling 10+ disconnected consoles (Oracle Cloud, AWS, Hostinger, Vercel, Cloudflare, and scattered SSH windows), I designed and built CloudOps Hub: a unified "Single Pane of Glass" for multi-cloud operations. It features Zero-Agent management over SSH2, active auto-healing probes with WhatsApp alerts, and analytical telemetry persisted in Oracle Autonomous Database (ATP Always Free) via ORDS REST API — under 50 MB host RAM overhead.'}
                                 </p>
                             </div>
 
+                            {/* Métricas Animadas */}
                             <div className="terminal-metrics-cards terminal-anim-step-4">
                                 <div className="terminal-mcard">
                                     <span className="mcard-val">{animatedYears}+</span>
@@ -512,9 +741,25 @@ const TechHero = () => {
                         <button className="terminal-btn-sm secondary" onClick={() => setView('card')}>
                             <ArrowLeft size={14} /> {language === 'pt' ? 'Voltar' : 'Back'}
                         </button>
-                        <button className="terminal-btn-sm primary" onClick={() => setView('terminal_project')}>
-                            <Radio size={14} /> {language === 'pt' ? 'Ver CloudOps Hub' : 'Inspect CloudOps Hub'} <ArrowRight size={14} />
-                        </button>
+                        <div className="terminal-bottom-actions-group">
+                            <a 
+                                href="/curriculo_en.pdf" 
+                                download="Jose_Vinicius_Lourenco_Resume.pdf"
+                                className="terminal-btn-sm secondary"
+                                title="Download Resume / Baixar CV"
+                            >
+                                <Download size={14} /> {language === 'pt' ? 'Baixar CV (PDF)' : 'Download CV (PDF)'}
+                            </a>
+                            <button 
+                                className="terminal-btn-sm primary" 
+                                onClick={() => {
+                                    setView('terminal_project');
+                                    setShowArchitecture(false);
+                                }}
+                            >
+                                <Radio size={14} /> {language === 'pt' ? 'Ver CloudOps Hub' : 'Inspect CloudOps Hub'} <ArrowRight size={14} />
+                            </button>
+                        </div>
                     </div>
                 </div>
             )}
@@ -579,72 +824,125 @@ const TechHero = () => {
                             </p>
                         </div>
 
-                        {/* TABS DE SELEÇÃO RÁPIDA DE PÁGINA */}
+                        {/* TABS DE SELEÇÃO RÁPIDA DE PÁGINA + ABA DE ARQUITETURA */}
                         <div className="terminal-page-tabs">
                             {cloudHubSlides.map((slide, idx) => (
                                 <button
                                     key={slide.id}
-                                    className={`terminal-page-tab ${currentImageIdx === idx ? 'active' : ''}`}
-                                    onClick={() => setCurrentImageIdx(idx)}
+                                    className={`terminal-page-tab ${(!showArchitecture && currentImageIdx === idx) ? 'active' : ''}`}
+                                    onClick={() => {
+                                        setShowArchitecture(false);
+                                        setCurrentImageIdx(idx);
+                                    }}
                                 >
                                     {language === 'pt' ? slide.tabTitlePt : slide.tabTitleEn}
                                 </button>
                             ))}
+                            <button
+                                className={`terminal-page-tab ${showArchitecture ? 'active' : ''}`}
+                                onClick={() => setShowArchitecture(true)}
+                            >
+                                <Layers size={13} style={{ display: 'inline', verticalAlign: '-2px', marginRight: '4px' }} />
+                                {language === 'pt' ? '5. Arquitetura do Sistema' : '5. System Architecture'}
+                            </button>
                         </div>
 
-                        {/* CARROSSEL DE IMAGENS EM FORMATO DE MONITOR DE TERMINAL */}
-                        <div className="terminal-monitor-box">
-                            <div className="terminal-monitor-top">
-                                <span className="terminal-monitor-screen-title">
-                                    🖥️ display_buffer_{currentImageIdx}: {language === 'pt' ? currentSlide.captionPt : currentSlide.captionEn}
-                                </span>
-                                <div className="terminal-monitor-nav">
-                                    <button onClick={prevImage} className="monitor-nav-btn" title="Página Anterior">
-                                        <ChevronLeft size={15} /> {language === 'pt' ? 'Anterior' : 'Prev'}
-                                    </button>
-                                    <span className="monitor-counter">
-                                        {currentImageIdx + 1} / {cloudHubSlides.length}
-                                    </span>
-                                    <button onClick={nextImage} className="monitor-nav-btn" title="Próxima Página">
-                                        {language === 'pt' ? 'Próxima' : 'Next'} <ChevronRight size={15} />
-                                    </button>
+                        {/* CONTEÚDO PRINCIPAL: CARROSSEL OU DIAGRAMA DE ARQUITETURA */}
+                        {!showArchitecture ? (
+                            <>
+                                {/* CARROSSEL DE IMAGENS EM FORMATO DE MONITOR DE TERMINAL */}
+                                <div className="terminal-monitor-box">
+                                    <div className="terminal-monitor-top">
+                                        <span className="terminal-monitor-screen-title">
+                                            🖥️ display_buffer_{currentImageIdx}: {language === 'pt' ? currentSlide.captionPt : currentSlide.captionEn}
+                                        </span>
+                                        <div className="terminal-monitor-nav">
+                                            <button onClick={prevImage} className="monitor-nav-btn" title="Página Anterior (Seta Esquerda)">
+                                                <ChevronLeft size={15} /> {language === 'pt' ? 'Anterior' : 'Prev'}
+                                            </button>
+                                            <span className="monitor-counter">
+                                                {currentImageIdx + 1} / {cloudHubSlides.length}
+                                            </span>
+                                            <button onClick={nextImage} className="monitor-nav-btn" title="Próxima Página (Seta Direita)">
+                                                {language === 'pt' ? 'Próxima' : 'Next'} <ChevronRight size={15} />
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                    <div className="terminal-screen-frame">
+                                        <img 
+                                            src={currentSlide.url} 
+                                            alt={currentSlide.name} 
+                                            className="terminal-screen-img"
+                                        />
+                                    </div>
                                 </div>
-                            </div>
-                            
-                            <div className="terminal-screen-frame">
-                                <img 
-                                    src={currentSlide.url} 
-                                    alt={currentSlide.name} 
-                                    className="terminal-screen-img"
-                                />
-                            </div>
-                        </div>
 
-                        {/* EXPLICAÇÃO TÉCNICA DINÂMICA DA PÁGINA SELECIONADA */}
-                        <div className="terminal-slide-box">
-                            <div className="terminal-slide-header">
-                                <span className="terminal-slide-badge">{currentSlide.badge}</span>
-                                <span style={{ fontSize: '0.72rem', color: '#6b7280' }}>
-                                    {language === 'pt' ? `Página ${currentImageIdx + 1} de 4` : `Page ${currentImageIdx + 1} of 4`}
-                                </span>
-                            </div>
-
-                            <p className="terminal-slide-caption">
-                                {language === 'pt' ? currentSlide.captionPt : currentSlide.captionEn}
-                            </p>
-
-                            <div className="terminal-specs-output">
-                                {slideDetails.map((detail, dIdx) => (
-                                    <div key={dIdx} className="spec-log-line">
-                                        <span className={`log-tag ${detail.tagClass}`}>{detail.tag}</span>
-                                        <span className="log-text">
-                                            <strong className="log-title">{detail.title}</strong>
-                                            {detail.desc}
+                                {/* EXPLICAÇÃO TÉCNICA DINÂMICA DA PÁGINA SELECIONADA */}
+                                <div className="terminal-slide-box">
+                                    <div className="terminal-slide-header">
+                                        <span className="terminal-slide-badge">{currentSlide.badge}</span>
+                                        <span style={{ fontSize: '0.72rem', color: '#6b7280' }}>
+                                            {language === 'pt' ? `Página ${currentImageIdx + 1} de 4` : `Page ${currentImageIdx + 1} of 4`}
                                         </span>
                                     </div>
-                                ))}
+
+                                    <p className="terminal-slide-caption">
+                                        {language === 'pt' ? currentSlide.captionPt : currentSlide.captionEn}
+                                    </p>
+
+                                    <div className="terminal-specs-output">
+                                        {slideDetails.map((detail, dIdx) => (
+                                            <div key={dIdx} className="spec-log-line">
+                                                <span className={`log-tag ${detail.tagClass}`}>{detail.tag}</span>
+                                                <span className="log-text">
+                                                    <strong className="log-title">{detail.title}</strong>
+                                                    {detail.desc}
+                                                </span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            </>
+                        ) : (
+                            /* DIAGRAMA DE ARQUITETURA SISTÊMICA (ASCII FLOW) */
+                            <div className="terminal-arch-box fade-in">
+                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
+                                    <span className="terminal-slide-badge">SYSTEM ARCHITECTURE TOPOLOGY</span>
+                                    <span style={{ fontSize: '0.72rem', color: '#9ca3af' }}>CloudOps Hub Flow</span>
+                                </div>
+                                <pre className="terminal-arch-pre">
+{`┌────────────────────────────────────────────────────────────────────────────────────────┐
+│                              FRONTEND INTERACTION LAYER                                │
+│   Next.js 16 (Turbopack) · React 19 · Tailwind CSS 4 · Cyber-Teal UI · xterm.js        │
+└───────────────────────────────────────────┬────────────────────────────────────────────┘
+                                            │ HTTPS / WSS (Zero Trust Anycast)
+                                            ▼
+┌────────────────────────────────────────────────────────────────────────────────────────┐
+│                        EDGE SECURITY & GATEWAY (Cloudflare)                            │
+│   Cloudflare Zero Trust Tunnel · mTLS Enforced · Zero Exposed Public Ports on VMs      │
+└───────────────────────────────────────────┬────────────────────────────────────────────┘
+                                            │ Encrypted Tunnel Bridge
+                                            ▼
+┌────────────────────────────────────────────────────────────────────────────────────────┐
+│                 BACKEND ORCHESTRATION & TELEMETRY ENGINE (Fastify)                     │
+│   • SSH2 Engine: Zero-Agent remote command executor (no heavy target daemons)          │
+│   • Dockerode: Real-time container start/stop/restart & live log streaming             │
+│   • 24/7 Watchdog: Autonomous RAM 90% threshold check & auto-restart on container crash│
+│   • Odisseu AI: LangChain RAG Copilot with telemetry index (Groq / Gemini / Ollama)    │
+│   • Backup Service: MySQL 8.0 live dumps -> gzip -9 with 7-day rolling purge           │
+└─────────────────────┬───────────────────────────────────────────┬──────────────────────┘
+                      │ SSH2 Remote Pipeline                      │ ORDS REST API
+                      ▼                                           ▼ (0 MB Host RAM)
+┌──────────────────────────────────────────┐    ┌────────────────────────────────────────┐
+│        TARGET CLOUD VMS / BARE-METAL     │    │       ORACLE AUTONOMOUS DB (ATP)       │
+│   • Oracle Cloud (OCI Always Free)       │    │   • Exadata 20GB NVMe Cloud Always Free│
+│   • AWS EC2 / Hostinger / VPS Linux      │    │   • Historical telemetry time-series   │
+│   • Docker Compose & PM2 Microservices   │    │   • Encrypted credentials (AES-256-GCM)│
+└──────────────────────────────────────────┘    └────────────────────────────────────────┘`}
+                                </pre>
                             </div>
-                        </div>
+                        )}
                     </div>
 
                     {/* Barra de Ações Compacta do Terminal */}
