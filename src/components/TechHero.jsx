@@ -689,22 +689,42 @@ const TechHero = () => {
                         {/* Ações Principais: Sobre Mim & Ver Projetos */}
                         <div className="terminal-actions-grid">
                             <button 
-                                className="terminal-btn secondary"
+                                className="terminal-action-card secondary"
                                 onClick={() => setView('terminal_about')}
                             >
-                                <User size={15} />
-                                {language === 'pt' ? 'Sobre Mim' : 'About Me'}
+                                <div className="action-card-icon-box">
+                                    <User size={18} />
+                                </div>
+                                <div className="action-card-text">
+                                    <span className="action-card-title">
+                                        {language === 'pt' ? 'Sobre Mim' : 'About Me'}
+                                    </span>
+                                    <span className="action-card-desc">
+                                        {language === 'pt' ? 'Trajetória, DBA & Experiência' : 'Career, DBA & SRE Experience'}
+                                    </span>
+                                </div>
+                                <ArrowRight size={16} className="action-card-arrow" />
                             </button>
+
                             <button 
-                                className="terminal-btn primary"
+                                className="terminal-action-card primary"
                                 onClick={() => {
                                     setView('terminal_project');
                                     setShowArchitecture(false);
                                 }}
                             >
-                                <Radio size={15} />
-                                {language === 'pt' ? 'Ver Projetos' : 'View Projects'}
-                                <ArrowRight size={15} />
+                                <div className="action-card-icon-box">
+                                    <Radio size={18} />
+                                </div>
+                                <div className="action-card-text">
+                                    <span className="action-card-title">
+                                        {language === 'pt' ? 'Ver Projetos' : 'View Projects'}
+                                    </span>
+                                    <span className="action-card-desc">
+                                        {language === 'pt' ? 'CloudOps Hub & Arquitetura' : 'CloudOps Hub & Architecture'}
+                                    </span>
+                                </div>
+                                <ArrowRight size={16} className="action-card-arrow" />
                             </button>
                         </div>
                     </div>
