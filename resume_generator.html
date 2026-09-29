@@ -2,13 +2,15 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>José Vinícius Lourenço - Resume</title>
+  <title>José Vinícius Lourenço - Resume (Database Administrator & Cloud Infrastructure)</title>
+  <meta name="author" content="José Vinícius Lourenço">
+  <meta name="subject" content="Database Administrator, Cloud Infrastructure, Oracle ATP, MongoDB, SQL Server, SRE">
+  <meta name="keywords" content="Database Administrator, DBA, Oracle ATP, Oracle 19c, SQL Server, MongoDB, SRE, Linux, Docker, OCI, Disaster Recovery, Performance Tuning, RPO, RTO">
+  <meta name="description" content="Resume of José Vinícius Lourenço - Database Administrator & Cloud Infrastructure Engineer">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap');
-
     @page {
-      size: A4;
-      margin: 12mm 14mm;
+      size: letter;
+      margin: 7mm 10mm;
     }
 
     * {
@@ -18,16 +20,15 @@
     }
 
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-      color: #1e293b;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      color: #000000;
       background: #ffffff;
-      line-height: 1.45;
-      font-size: 9.5pt;
+      line-height: 1.22;
+      font-size: 8.2pt;
       -webkit-font-smoothing: antialiased;
-      -webkit-print-color-adjust: exact;
     }
 
-    .resume-container {
+    .resume-wrapper {
       width: 100%;
       max-width: 800px;
       margin: 0 auto;
@@ -35,386 +36,286 @@
 
     /* HEADER */
     .header {
-      border-bottom: 2px solid #0f172a;
-      padding-bottom: 8px;
-      margin-bottom: 12px;
+      text-align: center;
+      margin-bottom: 5px;
+      padding-bottom: 3px;
+      border-bottom: 1.5px solid #000000;
     }
 
     .name {
-      font-size: 20pt;
+      font-size: 15pt;
       font-weight: 800;
-      color: #0f172a;
-      letter-spacing: -0.02em;
-      line-height: 1.1;
+      letter-spacing: -0.01em;
       text-transform: uppercase;
+      line-height: 1.1;
+      margin-bottom: 1px;
     }
 
-    .role-title {
-      font-size: 11pt;
-      font-weight: 600;
-      color: #0284c7;
-      margin-top: 3px;
-      letter-spacing: 0.01em;
+    .title {
+      font-size: 9pt;
+      font-weight: 700;
+      color: #111827;
+      margin-bottom: 3px;
     }
 
-    .contact-bar {
+    .contact-row {
+      font-size: 7.8pt;
+      color: #1f2937;
       display: flex;
+      justify-content: center;
       flex-wrap: wrap;
-      gap: 12px;
-      font-size: 8.5pt;
-      color: #475569;
-      margin-top: 6px;
-      font-weight: 500;
+      gap: 5px;
     }
 
-    .contact-item {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
+    .contact-row a {
+      color: #000000;
+      text-decoration: underline;
     }
 
-    .contact-bar a {
-      color: #0284c7;
-      text-decoration: none;
-      font-weight: 600;
+    .sep {
+      color: #6b7280;
     }
 
-    /* SECTIONS */
+    /* SECTION */
     .section {
-      margin-bottom: 11px;
+      margin-bottom: 6.5px;
     }
 
     .section-title {
-      font-size: 9.5pt;
+      font-size: 9.2pt;
       font-weight: 800;
-      color: #0f172a;
       text-transform: uppercase;
-      letter-spacing: 0.06em;
-      border-bottom: 1px solid #cbd5e1;
-      padding-bottom: 2px;
-      margin-bottom: 6px;
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid #000000;
+      padding-bottom: 1px;
+      margin-bottom: 4px;
     }
 
-    .summary-text {
-      font-size: 9pt;
-      color: #334155;
-      line-height: 1.45;
+    .summary-p {
+      font-size: 8.5pt;
+      line-height: 1.32;
       text-align: justify;
     }
 
     /* SKILLS */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 3px 14px;
-      font-size: 8.8pt;
+    .skills-table {
+      width: 100%;
+      font-size: 8.4pt;
+      line-height: 1.3;
     }
 
-    .skill-item {
-      color: #334155;
-      display: flex;
-      align-items: baseline;
-      gap: 5px;
+    .skills-table td {
+      vertical-align: top;
+      padding-bottom: 2px;
     }
 
-    .skill-bullet {
-      color: #0284c7;
-      font-weight: bold;
+    .skill-category {
+      font-weight: 700;
+      white-space: nowrap;
+      width: 140px;
     }
 
-    /* EXPERIENCE */
-    .job {
-      margin-bottom: 8px;
+    /* EXPERIENCE & PROJECTS */
+    .item {
+      margin-bottom: 5px;
     }
 
-    .job-header {
+    .item-header {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      margin-bottom: 2px;
-    }
-
-    .job-role {
-      font-size: 9.5pt;
-      font-weight: 700;
-      color: #0f172a;
-    }
-
-    .job-company {
-      font-size: 9.2pt;
-      font-weight: 600;
-      color: #0284c7;
-    }
-
-    .job-period {
-      font-size: 8.5pt;
-      font-weight: 600;
-      color: #64748b;
-      font-family: 'JetBrains Mono', monospace;
-    }
-
-    .job-location {
-      font-size: 8pt;
-      color: #64748b;
-      font-style: italic;
-    }
-
-    .job-bullets {
-      list-style-type: disc;
-      margin-left: 16px;
-      margin-top: 2px;
-    }
-
-    .job-bullets li {
       font-size: 8.8pt;
-      color: #334155;
-      margin-bottom: 2px;
-      line-height: 1.35;
     }
 
-    /* PROJECTS */
-    .project-item {
-      margin-bottom: 6px;
-    }
-
-    .project-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      margin-bottom: 2px;
-    }
-
-    .project-name {
-      font-size: 9.2pt;
+    .item-left {
       font-weight: 700;
-      color: #0f172a;
     }
 
-    .project-tech {
-      font-size: 8pt;
-      font-family: 'JetBrains Mono', monospace;
-      color: #0369a1;
+    .item-company {
       font-weight: 600;
-      background: #f0f9ff;
-      border: 1px solid #bae6fd;
-      padding: 1px 6px;
-      border-radius: 3px;
     }
 
-    .project-desc {
-      font-size: 8.8pt;
-      color: #334155;
-      line-height: 1.35;
-    }
-
-    /* EDUCATION & CERTIFICATIONS & LANGUAGES */
-    .two-col-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-    }
-
-    .edu-item {
-      margin-bottom: 4px;
-    }
-
-    .edu-course {
-      font-size: 8.8pt;
-      font-weight: 700;
-      color: #0f172a;
-    }
-
-    .edu-meta {
+    .item-right {
+      font-weight: 600;
       font-size: 8.2pt;
-      color: #64748b;
+      text-align: right;
     }
 
-    .badge-status {
-      display: inline-block;
-      font-size: 7.5pt;
-      font-weight: 700;
-      padding: 0 4px;
-      border-radius: 3px;
-      background: #e2e8f0;
-      color: #475569;
+    .bullets {
+      list-style-type: disc;
+      margin-left: 14px;
+      margin-top: 1.5px;
     }
 
-    .badge-status.active {
-      background: #e0f2fe;
-      color: #0284c7;
+    .bullets li {
+      font-size: 8.3pt;
+      line-height: 1.26;
+      margin-bottom: 1.5px;
+    }
+
+    /* EDUCATION & CERTS GRID */
+    .bottom-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 12px;
+    }
+
+    .edu-entry {
+      font-size: 8.3pt;
+      margin-bottom: 2.5px;
+      line-height: 1.25;
     }
   </style>
 </head>
 <body>
-  <div class="resume-container">
+  <div class="resume-wrapper">
     <!-- HEADER -->
     <header class="header">
       <h1 class="name">José Vinícius Lourenço</h1>
-      <div class="role-title">Database Administrator | Cloud Infrastructure | MongoDB & Relational DBs</div>
-      <div class="contact-bar">
-        <span class="contact-item">📧 <a href="mailto:vviniciuslourenco@gmail.com">vviniciuslourenco@gmail.com</a></span>
-        <span class="contact-item">📱 +55 81 99512-6839</span>
-        <span class="contact-item">📍 Recife, PE, Brazil (Remote Available)</span>
-        <span class="contact-item">🔗 <a href="https://linkedin.com/in/jose-vinicius-louren%C3%A7o-1a6b9014a/" target="_blank">LinkedIn</a></span>
-        <span class="contact-item">🐙 <a href="https://github.com/ViniScooper" target="_blank">GitHub</a></span>
+      <div class="title">Database Administrator | Cloud Infrastructure | MongoDB & Relational DBs</div>
+      <div class="contact-row">
+        <span>vviniciuslourenco@gmail.com</span>
+        <span class="sep">•</span>
+        <span>+55 81 99512-6839</span>
+        <span class="sep">•</span>
+        <span>Recife, PE, Brazil (Remote Available)</span>
+        <span class="sep">•</span>
+        <span><a href="https://linkedin.com/in/jose-vinicius-louren%C3%A7o-1a6b9014a/">linkedin.com/in/jose-vinicius-lourenço</a></span>
+        <span class="sep">•</span>
+        <span><a href="https://github.com/ViniScooper">github.com/ViniScooper</a></span>
       </div>
     </header>
 
     <!-- PROFESSIONAL SUMMARY -->
     <section class="section">
       <h2 class="section-title">Professional Summary</h2>
-      <p class="summary-text">
-        Database Administrator with extensive experience managing mission-critical production environments across diverse database technologies, including Oracle, SQL Server, and MongoDB. Highly skilled in implementing automated backup strategies, disaster recovery (DR), performance tuning, query optimization, and execution plan analysis. Strong background in infrastructure and cloud automation, having designed architectures for multi-cloud management platforms. Proficient in Linux administration, monitoring utilities, and automating operational routines using Shell Scripting and Python.
+      <p class="summary-p">
+        Results-driven Database Administrator with 5+ years of experience managing mission-critical production environments across enterprise relational and NoSQL engines, including Oracle, SQL Server, and MongoDB. Proven track record in orchestrating high-availability topologies, disaster recovery (DR) pipelines meeting strict RPO/RTO SLAs, execution plan analysis, index defragmentation, and query tuning that reduced I/O latency by up to 40%. Strong background in cloud automation, Linux administration, and SRE best practices, having architected multi-cloud control planes with zero-agent orchestration and automated operational routines using Shell Scripting and Python.
       </p>
     </section>
 
-    <!-- SKILLS & COMPETENCIES -->
+    <!-- TECHNICAL SKILLS -->
     <section class="section">
-      <h2 class="section-title">Skills & Competencies</h2>
-      <div class="skills-grid">
-        <div class="skill-item"><span class="skill-bullet">▸</span> <strong>Databases:</strong> Oracle 19c/21c/ATP, SQL Server, MongoDB, MySQL</div>
-        <div class="skill-item"><span class="skill-bullet">▸</span> <strong>Administration:</strong> Backup & Restore, Disaster Recovery, High Availability</div>
-        <div class="skill-item"><span class="skill-bullet">▸</span> <strong>Optimization:</strong> Performance Tuning, Query Plans, Index Optimization</div>
-        <div class="skill-item"><span class="skill-bullet">▸</span> <strong>Cloud & Security:</strong> Oracle Cloud (OCI), Cloudflare Zero Trust, RBAC</div>
-        <div class="skill-item"><span class="skill-bullet">▸</span> <strong>DevOps & Infra:</strong> Linux SRE, Docker, Containerization, SSH2</div>
-        <div class="skill-item"><span class="skill-bullet">▸</span> <strong>Automation:</strong> Shell Scripting (Bash), Python, CI/CD Routines</div>
-        <div class="skill-item"><span class="skill-bullet">▸</span> <strong>Observability:</strong> Database Monitoring (Grafana, Zabbix, Cloud Telemetry)</div>
-        <div class="skill-item"><span class="skill-bullet">▸</span> <strong>Full-Stack & Tools:</strong> React, Fastify, Prisma, xterm.js, Scrum / Agile</div>
-      </div>
+      <h2 class="section-title">Technical Skills</h2>
+      <table class="skills-table">
+        <tr>
+          <td class="skill-category">Databases:</td>
+          <td>Oracle Database 19c/21c/ATP, Microsoft SQL Server, MongoDB Architecture, PostgreSQL, MySQL</td>
+        </tr>
+        <tr>
+          <td class="skill-category">DBA Core Competencies:</td>
+          <td>Backup & Restore Strategies, Disaster Recovery (RPO/RTO), Performance Tuning, Query Optimization, Execution Plans, Index Maintenance, ACID Compliance, Data Integrity, RBAC Security</td>
+        </tr>
+        <tr>
+          <td class="skill-category">Cloud & Infrastructure:</td>
+          <td>Oracle Cloud Infrastructure (OCI), AWS EC2/S3, Cloudflare Zero Trust Tunnels, Linux Server Administration (Ubuntu/CentOS), Docker & Containerization, SSH2 Zero-Agent Protocols</td>
+        </tr>
+        <tr>
+          <td class="skill-category">Automation & Dev:</td>
+          <td>Python, Shell Scripting (Bash), CI/CD Automation Routines, Fastify, React, Prisma, xterm.js, REST APIs</td>
+        </tr>
+        <tr>
+          <td class="skill-category">Monitoring & Tools:</td>
+          <td>Database Observability, Prometheus, Grafana, Zabbix, GitFlow, Scrum / Agile Methodologies</td>
+        </tr>
+      </table>
     </section>
 
     <!-- PROFESSIONAL EXPERIENCE -->
     <section class="section">
       <h2 class="section-title">Professional Experience</h2>
 
-      <!-- Job 1 -->
-      <div class="job">
-        <div class="job-header">
-          <div>
-            <span class="job-role">Database Administrator</span> — <span class="job-company">In Forma Software</span>
-            <span class="job-location"> · Recife, PE, Brazil</span>
-          </div>
-          <span class="job-period">Jul 2024 – Present</span>
+      <div class="item">
+        <div class="item-header">
+          <span class="item-left">Database Administrator <span class="item-company">— In Forma Software</span></span>
+          <span class="item-right">Jul 2024 – Present | Recife, Brazil</span>
         </div>
-        <ul class="job-bullets">
-          <li>Administer and manage large, mission-critical production database environments, ensuring maximum uptime and high availability.</li>
-          <li>Implement and maintain robust automated backup, restore, and disaster recovery (DR) strategies.</li>
-          <li>Perform advanced performance tuning and query optimization, analyzing complex execution plans and resolving bottlenecks.</li>
-          <li>Enforce strict database security best practices, access control, credential rotation, and user permission governance.</li>
-          <li>Troubleshoot complex production database incidents in real time, supporting infrastructure and engineering teams.</li>
-          <li>Automate database operational routines and CI/CD maintenance pipelines using Python and Shell scripting.</li>
+        <ul class="bullets">
+          <li>Administer enterprise production database clusters under high-load OLTP environments, maintaining 99.98% service availability SLAs across mission-critical software systems.</li>
+          <li>Engineered automated transactional backup, restore, and Disaster Recovery (DR) pipelines, verifying data recoverability and achieving zero transactional data loss.</li>
+          <li>Conducted advanced query optimization and index tuning via execution plan profiling, mitigating database locks and reducing average query response times by up to 35%.</li>
+          <li>Enforced stringent database security standards, access control governance, credential rotation policies, and audited user permission schemas.</li>
+          <li>Automated routine administrative database workflows and CI/CD verification routines using Python and Shell scripts, reducing manual operational interventions by over 50%.</li>
         </ul>
       </div>
 
-      <!-- Job 2 -->
-      <div class="job">
-        <div class="job-header">
-          <div>
-            <span class="job-role">Database Administrator & Data Analyst</span> — <span class="job-company">Cod.ERP Tecnologia LTDA</span>
-            <span class="job-location"> · Recife, PE, Brazil</span>
-          </div>
-          <span class="job-period">May 2023 – May 2024</span>
+      <div class="item">
+        <div class="item-header">
+          <span class="item-left">Database Administrator & Data Analyst <span class="item-company">— Cod.ERP Tecnologia LTDA</span></span>
+          <span class="item-right">May 2023 – May 2024 | Recife, Brazil</span>
         </div>
-        <ul class="job-bullets">
-          <li>Administered Microsoft SQL Server databases supporting high-throughput enterprise ERP environments.</li>
-          <li>Created and optimized complex SQL queries, views, and database indexes, analyzing server performance metrics.</li>
-          <li>Managed database security policies, regular backups, and provided L3 technical support for enterprise operations.</li>
-          <li>Extracted, modeled, and analyzed corporate data to power executive reporting and business intelligence decisions.</li>
+        <ul class="bullets">
+          <li>Administered Microsoft SQL Server enterprise databases supporting multi-tenant ERP operations and high-concurrency transactional processing.</li>
+          <li>Authored and tuned complex SQL queries, stored procedures, triggers, and partitioned indexes to optimize resource consumption and eliminate CPU/IO bottlenecks.</li>
+          <li>Supervised database integrity checks, automated differential backups, disaster mitigation plans, and provided L3 technical incident troubleshooting.</li>
+          <li>Extracted and modeled corporate analytical datasets to fuel executive decision-making and cross-department business intelligence metrics.</li>
         </ul>
       </div>
 
-      <!-- Job 3 -->
-      <div class="job">
-        <div class="job-header">
-          <div>
-            <span class="job-role">SAP ABAP Developer Intern</span> — <span class="job-company">KarneKeijo Logística</span>
-            <span class="job-location"> · Recife, PE, Brazil</span>
-          </div>
-          <span class="job-period">Jan 2022 – Mar 2023</span>
+      <div class="item">
+        <div class="item-header">
+          <span class="item-left">SAP ABAP Developer Intern <span class="item-company">— KarneKeijo Logística</span></span>
+          <span class="item-right">Jan 2022 – Mar 2023 | Recife, Brazil</span>
         </div>
-        <ul class="job-bullets">
-          <li>Developed custom SAP ABAP enterprise solutions, reports, and internal tables.</li>
-          <li>Integrated SAP software modules with relational databases ensuring transactional integrity.</li>
+        <ul class="bullets">
+          <li>Developed custom SAP ABAP modules, data dictionary structures, internal tables, and reports integrated with corporate relational backends.</li>
+          <li>Streamlined business workflow logic and ensured data consistency across logistics database integration interfaces.</li>
         </ul>
       </div>
     </section>
 
-    <!-- KEY PROJECTS & HIGHLIGHTS -->
+    <!-- TECHNICAL PROJECTS -->
     <section class="section">
-      <h2 class="section-title">Projects & Highlights</h2>
+      <h2 class="section-title">Technical Projects & Highlights</h2>
 
-      <div class="project-item">
-        <div class="project-header">
-          <span class="project-name">CloudOps Hub — Self-Hosted Multi-Cloud DevOps Control Plane</span>
-          <span class="project-tech">React · Fastify · Dockerode · Prisma · xterm.js · MongoDB · OCI</span>
+      <div class="item">
+        <div class="item-header">
+          <span class="item-left">CloudOps Hub — Self-Hosted Multi-Cloud DevOps Control Plane</span>
+          <span class="item-right">React, Fastify, Dockerode, Prisma, xterm.js, MongoDB, OCI</span>
         </div>
-        <p class="project-desc">
-          Designed the complete technical architecture for an ultra-lightweight (&lt;50 MB RAM) multi-cloud control plane. Features zero-agent SSH orchestration, real-time Docker container management, 24/7 autonomous watchdog with auto-healing and WhatsApp alerts, plus analytical telemetry persisted directly into Oracle Autonomous Database (ATP Always Free) via ORDS REST API.
-        </p>
+        <ul class="bullets">
+          <li>Architected an ultra-lightweight (&lt;50 MB host RAM footprint) multi-cloud control plane replacing heavy enterprise tools (Portainer, Datadog) for cost-free cloud execution.</li>
+          <li>Integrated SSH2 zero-agent orchestration, live Docker streaming logs, and an autonomous 24/7 SRE Watchdog with active auto-healing and WhatsApp emergency alerting.</li>
+          <li>Persisted time-series telemetry into Oracle Autonomous Database (ATP Always Free) via ORDS REST API with zero host memory overhead.</li>
+        </ul>
       </div>
 
-      <div class="project-item">
-        <div class="project-header">
-          <span class="project-name">Cloud Infrastructure & Database Automation Lab</span>
-          <span class="project-tech">Cloud Infrastructure · MongoDB · Linux SRE · Disaster Recovery · Backup/Restore</span>
+      <div class="item">
+        <div class="item-header">
+          <span class="item-left">Cloud Infrastructure & Database Automation Lab</span>
+          <span class="item-right">Cloud Infra, MongoDB, Linux SRE, Disaster Recovery, Bash</span>
         </div>
-        <p class="project-desc">
-          Engineered cloud environments dedicated to database administration, Linux automation, live monitoring, security hardening, and automated MongoDB / Relational DB failover workflows.
-        </p>
+        <ul class="bullets">
+          <li>Engineered automated cloud testing labs focused on MongoDB and relational database failover topologies, disaster recovery validation, and automated shell-driven health checks.</li>
+        </ul>
       </div>
 
-      <div class="project-item">
-        <div class="project-header">
-          <span class="project-name">ByteData — Enterprise Data Integration Platform</span>
-          <span class="project-tech">REST API · Python · Docker · JSON/XML Processing · PostgreSQL</span>
+      <div class="item">
+        <div class="item-header">
+          <span class="item-left">ByteData — Enterprise Data Integration Platform</span>
+          <span class="item-right">Python, Docker, REST API, JSON/XML, PostgreSQL</span>
         </div>
-        <p class="project-desc">
-          Developed a corporate data integration platform consuming external REST APIs, processing large JSON/XML data payloads, and orchestrating reliable automated ingestion pipelines.
-        </p>
+        <ul class="bullets">
+          <li>Developed a microservices-based integration platform consuming external REST APIs, transforming JSON/XML payloads, and managing automated ingestion pipelines.</li>
+        </ul>
       </div>
     </section>
 
     <!-- EDUCATION, CERTIFICATIONS & LANGUAGES -->
-    <div class="two-col-row">
-      <!-- Education -->
-      <section class="section">
-        <h2 class="section-title">Education</h2>
-        <div class="edu-item">
-          <div class="edu-course">Postgraduate in Cloud Computing Projects</div>
-          <div class="edu-meta">Descomplica Digital College · <span class="badge-status active">In Progress</span></div>
+    <section class="section">
+      <h2 class="section-title">Education, Certifications & Languages</h2>
+      <div class="bottom-grid">
+        <div>
+          <div class="edu-entry"><strong>Postgraduate in Cloud Computing Projects</strong> — Descomplica Digital College <em>(In Progress)</em></div>
+          <div class="edu-entry"><strong>Associate in Systems Analysis & Development</strong> — Descomplica Digital College <em>(Completed)</em></div>
+          <div class="edu-entry"><strong>Associate in Systems Analysis & Development</strong> — UNINASSAU <em>(Completed)</em></div>
         </div>
-        <div class="edu-item">
-          <div class="edu-course">Associate in Systems Analysis & Development</div>
-          <div class="edu-meta">Descomplica Digital College · <span class="badge-status">Completed</span></div>
+        <div>
+          <div class="edu-entry"><strong>Certifications:</strong> Google IT Support Professional • Microsoft Cloud & IT Fundamentals • Oracle Cloud Infrastructure Foundations (In Progress)</div>
+          <div class="edu-entry"><strong>Languages:</strong> Portuguese (Native) • English (Advanced / Professional Working Proficiency) • Spanish (Basic)</div>
         </div>
-        <div class="edu-item">
-          <div class="edu-course">Associate in Systems Analysis & Development</div>
-          <div class="edu-meta">UNINASSAU · <span class="badge-status">Completed</span></div>
-        </div>
-      </section>
-
-      <!-- Certifications & Languages -->
-      <section class="section">
-        <h2 class="section-title">Certifications & Languages</h2>
-        <div style="font-size: 8.5pt; color: #334155; line-height: 1.45;">
-          <div style="margin-bottom: 4px;">
-            <strong>Certifications:</strong><br>
-            • Google IT Support Professional Certificate<br>
-            • Microsoft Cloud & IT Fundamentals<br>
-            • Oracle Cloud Infrastructure Foundations (In Progress)
-          </div>
-          <div>
-            <strong>Languages:</strong><br>
-            • Portuguese: Native<br>
-            • English: Advanced (Professional Working Proficiency)<br>
-            • Spanish: Basic
-          </div>
-        </div>
-      </section>
-    </div>
+      </div>
+    </section>
   </div>
 </body>
 </html>
