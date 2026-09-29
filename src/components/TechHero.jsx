@@ -464,16 +464,24 @@ const TechHero = () => {
                     {/* Conteúdo do Card Retangular */}
                     <div className="terminal-rect-body">
                         <div className="terminal-rect-top">
-                            <div className="terminal-avatar-box">
-                                <Terminal size={28} />
+                            <div className="terminal-avatar-headings-group">
+                                <div className="terminal-avatar-box">
+                                    <Terminal size={26} />
+                                </div>
+                                <div className="terminal-rect-headings">
+                                    <h1 className="terminal-user-name">José Vinícius Lourenço</h1>
+                                    <p className="terminal-user-role">
+                                        {language === 'pt' 
+                                            ? 'Database Administrator | Cloud Infrastructure | MongoDB & Relational DBs'
+                                            : 'Database Administrator | Cloud Infrastructure | MongoDB & Relational DBs'}
+                                    </p>
+                                </div>
                             </div>
-                            <div className="terminal-rect-headings">
-                                <h1 className="terminal-user-name">José Vinícius Lourenço</h1>
-                                <p className="terminal-user-role">
-                                    {language === 'pt' 
-                                        ? 'Database Administrator | Cloud Infrastructure | MongoDB & Relational DBs'
-                                        : 'Database Administrator | Cloud Infrastructure | MongoDB & Relational DBs'}
-                                </p>
+
+                            {/* Status de Disponibilidade & Região no Topo */}
+                            <div className="terminal-status-row">
+                                <span className="pulse-green"></span>
+                                <span>{language === 'pt' ? 'Disponível para trabalho remoto global' : 'Available for global remote work'}</span>
                             </div>
                         </div>
 
@@ -483,12 +491,6 @@ const TechHero = () => {
                             <span className="terminal-pill"><Database size={12} /> MongoDB & SQL Server</span>
                             <span className="terminal-pill"><Server size={12} /> Linux SRE & Docker</span>
                             <span className="terminal-pill"><Cloud size={12} /> OCI & Cloudflare</span>
-                        </div>
-
-                        {/* Status de Disponibilidade & Região */}
-                        <div className="terminal-status-row">
-                            <span className="pulse-green"></span>
-                            <span>{language === 'pt' ? 'Disponível para contratação e projetos remotos globais' : 'Available for global remote employment and contracts'}</span>
                         </div>
 
                         {/* Telemetria SRE ao Vivo */}
