@@ -25,7 +25,9 @@ import {
   Activity, 
   ShieldCheck, 
   Layers, 
-  Send 
+  Send,
+  Copy,
+  Check 
 } from 'lucide-react';
 
 const cloudHubSlides = [
@@ -290,6 +292,49 @@ const TechHero = () => {
     // Interactive CLI State
     const [cliInput, setCliInput] = useState('');
     const [cliOutput, setCliOutput] = useState(null);
+    const [cmdHistory, setCmdHistory] = useState([]);
+    const [historyIdx, setHistoryIdx] = useState(-1);
+    const [copiedEmail, setCopiedEmail] = useState(false);
+
+    // Função para copiar o e-mail com feedback visual
+    const handleCopyEmail = () => {
+        navigator.clipboard.writeText('vviniciuslourenco@gmail.com');
+        setCopiedEmail(true);
+        setTimeout(() => setCopiedEmail(false), 2500);
+    };
+
+    // Navegação de Histórico com Setas (↑ / ↓) e Autocomplete com Tab
+    const handleInputKeyDown = (e) => {
+        if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            if (cmdHistory.length === 0) return;
+            const nextIdx = Math.min(historyIdx + 1, cmdHistory.length - 1);
+            setHistoryIdx(nextIdx);
+            setCliInput(cmdHistory[nextIdx]);
+        } else if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            if (historyIdx > 0) {
+                const nextIdx = historyIdx - 1;
+                setHistoryIdx(nextIdx);
+                setCliInput(cmdHistory[nextIdx]);
+            } else if (historyIdx === 0) {
+                setHistoryIdx(-1);
+                setCliInput('');
+            }
+        } else if (e.key === 'Tab') {
+            e.preventDefault();
+            const val = cliInput.trim().toLowerCase();
+            if (!val) return;
+            const availableCmds = [
+                'help', 'whoami', 'projects', 'about', 'arch', 
+                'cv pt', 'cv en', 'contact', 'copy email', 'clear'
+            ];
+            const match = availableCmds.find(c => c.startsWith(val));
+            if (match) {
+                setCliInput(match);
+            }
+        }
+    };
 
     // Animação de contagem dos números na aba Sobre Mim
     const [animatedYears, setAnimatedYears] = useState(0);
@@ -364,6 +409,10 @@ const TechHero = () => {
         const cleanCmd = cmdStr.trim().toLowerCase();
         if (!cleanCmd) return;
 
+        // Adiciona ao histórico do terminal
+        setCmdHistory((prev) => [cmdStr.trim(), ...prev.filter(c => c !== cmdStr.trim())]);
+        setHistoryIdx(-1);
+
         if (cleanCmd === 'clear' || cleanCmd === 'cls') {
             setCliOutput(null);
             setCliInput('');
@@ -373,14 +422,14 @@ const TechHero = () => {
         if (cleanCmd === 'help') {
             setCliOutput(
                 language === 'pt'
-                    ? "Comandos disponíveis:\n• whoami        -> Ver perfil profissional\n• projects      -> Abrir projeto CloudOps Hub\n• about         -> Ler sobre trajetória e carreira\n• arch          -> Visualizar arquitetura do sistema\n• cv pt / cv en -> Baixar currículo em PDF (Português / Inglês)\n• contact       -> Canais de contato direto\n• clear         -> Limpar saída"
-                    : "Available commands:\n• whoami        -> View professional profile\n• projects      -> Inspect CloudOps Hub project\n• about         -> Read career background\n• arch          -> View system architecture diagram\n• cv pt / cv en -> Download resume in PDF (Portuguese / English)\n• contact       -> Direct contact channels\n• clear         -> Clear output"
+                    ? "Comandos disponíveis:\n• whoami        -> Ver perfil profissional\n• projects      -> Abrir projeto CloudOps Hub\n• about         -> Ler sobre trajetória e carreira\n• arch          -> Visualizar arquitetura do sistema\n• cv pt / cv en -> Baixar currículo em PDF (Português / Inglês)\n• contact       -> Canais de contato direto\n• copy email    -> Copiar e-mail para a área de transferência\n• clear         -> Limpar saída\n(Dica: Pressione Tab para autocompletar e ↑/↓ para navegar no histórico)"
+                    : "Available commands:\n• whoami        -> View professional profile\n• projects      -> Inspect CloudOps Hub project\n• about         -> Read career background\n• arch          -> View system architecture diagram\n• cv pt / cv en -> Download resume in PDF (Portuguese / English)\n• contact       -> Direct contact channels\n• copy email    -> Copy e-mail to clipboard\n• clear         -> Clear output\n(Tip: Press Tab to autocomplete and ↑/↓ to navigate history)"
             );
         } else if (cleanCmd === 'whoami') {
             setCliOutput(
                 language === 'pt'
-                    ? "José Vinícius Lourenço — Database Administrator & Cloud Infrastructure\n• 5+ anos com bancos de missão crítica (Oracle ATP, MongoDB, SQL Server)\n• Engenharia de Confiabilidade (Linux SRE, Docker, OCI, Python & Bash)\n• Criador do CloudOps Hub — Console de Gestão Multi-Cloud com IA"
-                    : "José Vinícius Lourenço — Database Administrator & Cloud Infrastructure\n• 5+ years managing mission-critical databases (Oracle ATP, MongoDB, SQL Server)\n• Site Reliability Engineering (Linux SRE, Docker, OCI, Python & Bash)\n• Creator of CloudOps Hub — Multi-Cloud DevOps Control Plane with AI"
+                    ? "José Vinícius Lourenço — Database Administrator & Cloud Infrastructure\n• 5+ anos com bancos de missão crítica (Oracle ATP/19c, MongoDB, SQL Server)\n• Migrações complexas de banco de dados com zero perda de dados\n• Engenharia de Confiabilidade (Linux SRE, Docker, OCI, Python & Bash)\n• Criador do CloudOps Hub — Console de Gestão Multi-Cloud com IA"
+                    : "José Vinícius Lourenço — Database Administrator & Cloud Infrastructure\n• 5+ years managing mission-critical databases (Oracle ATP/19c, MongoDB, SQL Server)\n• End-to-end database migrations with zero data loss\n• Site Reliability Engineering (Linux SRE, Docker, OCI, Python & Bash)\n• Creator of CloudOps Hub — Multi-Cloud DevOps Control Plane with AI"
             );
         } else if (cleanCmd === 'projects' || cleanCmd === 'cloudops') {
             setView('terminal_project');
@@ -401,9 +450,16 @@ const TechHero = () => {
                 window.open('/curriculo_en.pdf', '_blank');
                 setCliOutput(language === 'pt' ? "Iniciando download de curriculo_en.pdf (English)..." : "Downloading curriculo_en.pdf (English)...");
             }
-        } else if (cleanCmd === 'contact' || cleanCmd === 'email') {
+        } else if (cleanCmd === 'contact') {
             setCliOutput(
-                `José Vinícius Lourenço\n• E-mail: vviniciuslourenco@gmail.com\n• WhatsApp: +55 81 99512-6839\n• LinkedIn: linkedin.com/in/jose-vinicius-lourenço-1a6b9014a/\n• Local: Recife, PE, Brasil (Disponível para Trabalho Remoto Global)`
+                `José Vinícius Lourenço\n• E-mail: vviniciuslourenco@gmail.com\n• WhatsApp: +55 81 99512-6839\n• LinkedIn: linkedin.com/in/jose-vinicius-lourenço-1a6b9014a/\n• GitHub: github.com/ViniScooper\n• Local: Recife, PE, Brasil (Disponível para Trabalho Remoto Global)`
+            );
+        } else if (cleanCmd.includes('copy') || cleanCmd === 'email') {
+            handleCopyEmail();
+            setCliOutput(
+                language === 'pt'
+                    ? "vviniciuslourenco@gmail.com copiado para a área de transferência! ✅"
+                    : "vviniciuslourenco@gmail.com copied to clipboard! ✅"
             );
         } else if (cleanCmd.startsWith('sudo')) {
             setCliOutput(
@@ -551,6 +607,21 @@ const TechHero = () => {
                             >
                                 <Phone size={15} /> <span>WhatsApp</span>
                             </a>
+                            <button 
+                                type="button"
+                                onClick={handleCopyEmail}
+                                title={language === 'pt' ? 'Copiar E-mail' : 'Copy E-mail'} 
+                                className="terminal-social-link copy-email-btn"
+                                style={{
+                                    cursor: 'pointer',
+                                    borderColor: copiedEmail ? '#22c55e' : undefined,
+                                    color: copiedEmail ? '#22c55e' : undefined,
+                                    background: copiedEmail ? 'rgba(34, 197, 94, 0.12)' : undefined
+                                }}
+                            >
+                                {copiedEmail ? <Check size={14} /> : <Mail size={14} />}
+                                <span>{copiedEmail ? (language === 'pt' ? 'Copiado!' : 'Copied!') : 'E-mail'}</span>
+                            </button>
                             <a 
                                 href="/curriculo_pt.pdf" 
                                 download="Jose_Vinicius_Lourenco_Curriculo.pdf"
@@ -580,8 +651,12 @@ const TechHero = () => {
                                 <input 
                                     type="text" 
                                     value={cliInput}
-                                    onChange={(e) => setCliInput(e.target.value)}
-                                    placeholder={language === 'pt' ? 'Digite "help", "whoami", "cv pt", "cv en", "projects"...' : 'Type "help", "whoami", "cv pt", "cv en", "projects"...'}
+                                    onChange={(e) => {
+                                        setCliInput(e.target.value);
+                                        if (historyIdx !== -1) setHistoryIdx(-1);
+                                    }}
+                                    onKeyDown={handleInputKeyDown}
+                                    placeholder={language === 'pt' ? 'Digite "help", "whoami", "cv pt", "cv en", "contact"... (Tab completa, ↑ histórico)' : 'Type "help", "whoami", "cv pt", "cv en", "contact"... (Tab to complete, ↑ history)'}
                                     className="terminal-cli-input"
                                 />
                                 <button type="submit" style={{ background: 'none', border: 'none', color: '#20d6c7', cursor: 'pointer', padding: 0 }} title="Executar">
@@ -597,6 +672,9 @@ const TechHero = () => {
                                 <button type="button" className="terminal-cmd-chip" onClick={() => executeCliCommand('cv pt')}>curl cv_pt.pdf</button>
                                 <button type="button" className="terminal-cmd-chip" onClick={() => executeCliCommand('cv en')}>curl cv_en.pdf</button>
                                 <button type="button" className="terminal-cmd-chip" onClick={() => executeCliCommand('contact')}>contact</button>
+                                <button type="button" className="terminal-cmd-chip" onClick={() => executeCliCommand('copy email')}>
+                                    {copiedEmail ? '✓ email' : 'copy email'}
+                                </button>
                                 <button type="button" className="terminal-cmd-chip" onClick={() => executeCliCommand('arch')}>arch</button>
                             </div>
 
