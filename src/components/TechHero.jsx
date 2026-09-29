@@ -779,12 +779,12 @@ const TechHero = () => {
                                     <div className="career-header">
                                         <span className="career-role">Database Administrator</span>
                                         <span className="career-company">In Forma Software</span>
-                                        <span className="career-period">Jul 2024 — Presente</span>
+                                        <span className="career-period">{language === 'pt' ? 'Jul 2024 — Presente' : 'Jul 2024 — Present'}</span>
                                     </div>
                                     <p className="career-desc">
                                         {language === 'pt'
-                                            ? 'Administração de ambientes de banco de missão crítica com alta disponibilidade, estratégias de backup/restore e disaster recovery, análise de execution plans, tuning de queries e automação de tarefas CI/CD com Python e Shell Scripting.'
-                                            : 'Administering mission-critical production databases ensuring high availability, robust backup/disaster recovery strategies, advanced performance tuning, execution plan analysis, and CI/CD automation with Python and Shell.'}
+                                            ? 'Atuação direta na administração de Oracle Database (19c/21c), execução de migrações complexas de banco de dados, sustentação de alta disponibilidade (99.98% SLA), backup/restore, disaster recovery, análise de execution plans e automação com Python e Shell Scripting.'
+                                            : 'Direct administration of Oracle Database (19c/21c), complex database migrations, high availability (99.98% SLA), backup/restore, disaster recovery, execution plan analysis, and CI/CD automation with Python and Shell.'}
                                     </p>
                                 </div>
 
@@ -792,12 +792,27 @@ const TechHero = () => {
                                     <div className="career-header">
                                         <span className="career-role">Database Administrator & Data Analyst</span>
                                         <span className="career-company">Cod.ERP Tecnologia LTDA</span>
-                                        <span className="career-period">Mai 2023 — Mai 2024</span>
+                                        <span className="career-period">{language === 'pt' ? 'Mai 2023 — Mai 2024' : 'May 2023 — May 2024'}</span>
                                     </div>
                                     <p className="career-desc">
                                         {language === 'pt'
                                             ? 'Administração de bases Microsoft SQL Server para ERPs corporativos de grande porte, index tuning, queries complexas, segurança e rotinas analíticas para tomada de decisão.'
-                                            : 'Administered Microsoft SQL Server for enterprise ERPs, index tuning, complex SQL query optimization, database security, and business data analytics.'}
+                                            : 'Administered Microsoft SQL Server for enterprise ERPs, index tuning, complex SQL query optimization, database security, and business data analytics for strategic decision-making.'}
+                                    </p>
+                                </div>
+
+                                <div className="career-item">
+                                    <div className="career-header">
+                                        <span className="career-role">
+                                            {language === 'pt' ? 'Estagiário de Desenvolvimento SAP ABAP' : 'SAP ABAP Developer Intern'}
+                                        </span>
+                                        <span className="career-company">KarneKeijo Logística</span>
+                                        <span className="career-period">{language === 'pt' ? 'Jan 2022 — Mar 2023' : 'Jan 2022 — Mar 2023'}</span>
+                                    </div>
+                                    <p className="career-desc">
+                                        {language === 'pt'
+                                            ? 'Desenvolvimento de rotinas e relatórios customizados em SAP ABAP, tabelas internas e integração de regras de negócio com bancos de dados relacionais corporativos.'
+                                            : 'Developed custom SAP ABAP modules, reports, internal tables, and integrated business workflow logic with corporate relational databases.'}
                                     </p>
                                 </div>
                             </div>
