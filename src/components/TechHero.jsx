@@ -373,8 +373,8 @@ const TechHero = () => {
         if (cleanCmd === 'help') {
             setCliOutput(
                 language === 'pt'
-                    ? "Comandos disponíveis:\n• whoami       -> Ver perfil profissional\n• projects     -> Abrir projeto CloudOps Hub\n• about        -> Ler sobre trajetória e carreira\n• arch         -> Visualizar arquitetura do sistema\n• cv (ou curl) -> Baixar currículo em PDF (EN)\n• contact      -> Canais de contato direto\n• clear        -> Limpar saída"
-                    : "Available commands:\n• whoami       -> View professional profile\n• projects     -> Inspect CloudOps Hub project\n• about        -> Read career background\n• arch         -> View system architecture diagram\n• cv (or curl) -> Download resume in PDF (EN)\n• contact      -> Direct contact channels\n• clear        -> Clear output"
+                    ? "Comandos disponíveis:\n• whoami        -> Ver perfil profissional\n• projects      -> Abrir projeto CloudOps Hub\n• about         -> Ler sobre trajetória e carreira\n• arch          -> Visualizar arquitetura do sistema\n• cv pt / cv en -> Baixar currículo em PDF (Português / Inglês)\n• contact       -> Canais de contato direto\n• clear         -> Limpar saída"
+                    : "Available commands:\n• whoami        -> View professional profile\n• projects      -> Inspect CloudOps Hub project\n• about         -> Read career background\n• arch          -> View system architecture diagram\n• cv pt / cv en -> Download resume in PDF (Portuguese / English)\n• contact       -> Direct contact channels\n• clear         -> Clear output"
             );
         } else if (cleanCmd === 'whoami') {
             setCliOutput(
@@ -394,8 +394,13 @@ const TechHero = () => {
             setShowArchitecture(true);
             setCliOutput(language === 'pt' ? "Exibindo diagrama de arquitetura..." : "Displaying architecture diagram...");
         } else if (cleanCmd.includes('cv') || cleanCmd.includes('curl') || cleanCmd.includes('pdf')) {
-            window.open('/curriculo_en.pdf', '_blank');
-            setCliOutput(language === 'pt' ? "Iniciando download de curriculo_en.pdf..." : "Downloading curriculo_en.pdf...");
+            if (cleanCmd.includes('pt') || (cleanCmd === 'cv' && language === 'pt')) {
+                window.open('/curriculo_pt.pdf', '_blank');
+                setCliOutput(language === 'pt' ? "Iniciando download de curriculo_pt.pdf (Português)..." : "Downloading curriculo_pt.pdf (Portuguese)...");
+            } else {
+                window.open('/curriculo_en.pdf', '_blank');
+                setCliOutput(language === 'pt' ? "Iniciando download de curriculo_en.pdf (English)..." : "Downloading curriculo_en.pdf (English)...");
+            }
         } else if (cleanCmd === 'contact' || cleanCmd === 'email') {
             setCliOutput(
                 `José Vinícius Lourenço\n• E-mail: vviniciuslourenco@gmail.com\n• WhatsApp: +55 81 99512-6839\n• LinkedIn: linkedin.com/in/jose-vinicius-lourenço-1a6b9014a/\n• Local: Recife, PE, Brasil (Disponível para Trabalho Remoto Global)`
@@ -472,8 +477,8 @@ const TechHero = () => {
                                     <h1 className="terminal-user-name">José Vinícius Lourenço</h1>
                                     <p className="terminal-user-role">
                                         {language === 'pt' 
-                                            ? 'Database Administrator | Cloud Infrastructure | MongoDB & Relational DBs'
-                                            : 'Database Administrator | Cloud Infrastructure | MongoDB & Relational DBs'}
+                                            ? 'Database Administrator | Cloud Infrastructure | Oracle, MongoDB & Relational DBs'
+                                            : 'Database Administrator | Cloud Infrastructure | Oracle, MongoDB & Relational DBs'}
                                     </p>
                                 </div>
                             </div>
@@ -547,12 +552,24 @@ const TechHero = () => {
                                 <Phone size={15} /> <span>WhatsApp</span>
                             </a>
                             <a 
-                                href="/curriculo_en.pdf" 
-                                download="Jose_Vinicius_Lourenco_Resume.pdf"
-                                title="Download Resume / Baixar CV" 
+                                href="/curriculo_pt.pdf" 
+                                download="Jose_Vinicius_Lourenco_Curriculo.pdf"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                title="Baixar Currículo em Português (PDF)" 
                                 className="terminal-social-link cv-highlight"
                             >
-                                <Download size={15} /> <span>curl cv.pdf</span>
+                                <Download size={14} /> <span>Currículo (PT)</span>
+                            </a>
+                            <a 
+                                href="/curriculo_en.pdf" 
+                                download="Jose_Vinicius_Lourenco_Resume.pdf"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                title="Download Resume in English (PDF)" 
+                                className="terminal-social-link cv-highlight"
+                            >
+                                <Download size={14} /> <span>Resume (EN)</span>
                             </a>
                         </div>
 
@@ -564,7 +581,7 @@ const TechHero = () => {
                                     type="text" 
                                     value={cliInput}
                                     onChange={(e) => setCliInput(e.target.value)}
-                                    placeholder={language === 'pt' ? 'Digite "help", "whoami", "cv", "projects"...' : 'Type "help", "whoami", "cv", "projects"...'}
+                                    placeholder={language === 'pt' ? 'Digite "help", "whoami", "cv pt", "cv en", "projects"...' : 'Type "help", "whoami", "cv pt", "cv en", "projects"...'}
                                     className="terminal-cli-input"
                                 />
                                 <button type="submit" style={{ background: 'none', border: 'none', color: '#20d6c7', cursor: 'pointer', padding: 0 }} title="Executar">
@@ -577,7 +594,8 @@ const TechHero = () => {
                                 <span className="terminal-cmd-chip-label">{language === 'pt' ? 'Atalhos:' : 'Quick:'}</span>
                                 <button type="button" className="terminal-cmd-chip" onClick={() => executeCliCommand('help')}>help</button>
                                 <button type="button" className="terminal-cmd-chip" onClick={() => executeCliCommand('whoami')}>whoami</button>
-                                <button type="button" className="terminal-cmd-chip" onClick={() => executeCliCommand('cv')}>curl cv.pdf</button>
+                                <button type="button" className="terminal-cmd-chip" onClick={() => executeCliCommand('cv pt')}>curl cv_pt.pdf</button>
+                                <button type="button" className="terminal-cmd-chip" onClick={() => executeCliCommand('cv en')}>curl cv_en.pdf</button>
                                 <button type="button" className="terminal-cmd-chip" onClick={() => executeCliCommand('contact')}>contact</button>
                                 <button type="button" className="terminal-cmd-chip" onClick={() => executeCliCommand('arch')}>arch</button>
                             </div>
@@ -745,12 +763,24 @@ const TechHero = () => {
                         </button>
                         <div className="terminal-bottom-actions-group">
                             <a 
+                                href="/curriculo_pt.pdf" 
+                                download="Jose_Vinicius_Lourenco_Curriculo.pdf"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="terminal-btn-sm secondary"
+                                title="Baixar Currículo em Português (PDF)"
+                            >
+                                <Download size={14} /> <span>{language === 'pt' ? 'Currículo (PT)' : 'CV (PT)'}</span>
+                            </a>
+                            <a 
                                 href="/curriculo_en.pdf" 
                                 download="Jose_Vinicius_Lourenco_Resume.pdf"
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 className="terminal-btn-sm secondary"
-                                title="Download Resume / Baixar CV"
+                                title="Download Resume in English (PDF)"
                             >
-                                <Download size={14} /> {language === 'pt' ? 'Baixar CV (PDF)' : 'Download CV (PDF)'}
+                                <Download size={14} /> <span>{language === 'pt' ? 'Currículo (EN)' : 'Resume (EN)'}</span>
                             </a>
                             <button 
                                 className="terminal-btn-sm primary" 
