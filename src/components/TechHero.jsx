@@ -428,8 +428,8 @@ const TechHero = () => {
         } else if (cleanCmd === 'whoami') {
             setCliOutput(
                 language === 'pt'
-                    ? "José Vinícius Lourenço — Database Administrator & Cloud Infrastructure\n• 5+ anos com bancos de missão crítica (Oracle ATP/19c, MongoDB, SQL Server)\n• Migrações complexas de banco de dados com zero perda de dados\n• Engenharia de Confiabilidade (Linux SRE, Docker, OCI, Python & Bash)\n• Criador do CloudOps Hub — Console de Gestão Multi-Cloud com IA"
-                    : "José Vinícius Lourenço — Database Administrator & Cloud Infrastructure\n• 5+ years managing mission-critical databases (Oracle ATP/19c, MongoDB, SQL Server)\n• End-to-end database migrations with zero data loss\n• Site Reliability Engineering (Linux SRE, Docker, OCI, Python & Bash)\n• Creator of CloudOps Hub — Multi-Cloud DevOps Control Plane with AI"
+                    ? "José Vinícius Lourenço — Software Developer & Database Engineer\n• 5+ anos com bancos em produção (PostgreSQL na AWS RDS, Oracle, SQL Server)\n• Migrações heterogêneas de banco de dados (AWS DMS / CDC) e Performance Tuning (autovacuum, locks)\n• Automação de infraestrutura por código (Terraform IaC) e versionamento de schema (Flyway)\n• Criador do CloudOps Hub — Console de Gestão Multi-Cloud com IA"
+                    : "José Vinícius Lourenço — Software Developer & Database Engineer\n• 5+ years with production databases (PostgreSQL on AWS RDS, Oracle, SQL Server)\n• Heterogeneous database migrations (AWS DMS / CDC) & Performance Tuning (autovacuum, locks)\n• Infrastructure as Code (Terraform IaC) & schema evolution pipelines (Flyway)\n• Creator of CloudOps Hub — Multi-Cloud DevOps Control Plane with AI"
             );
         } else if (cleanCmd === 'projects' || cleanCmd === 'cloudops') {
             setView('terminal_project');

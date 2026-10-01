@@ -32,12 +32,12 @@ const About = () => {
                                         <Terminal size={28} />
                                     </div>
                                     <h3 className="tech-card-name">Vinicius</h3>
-                                    <p className="tech-card-role">Database & Cloud Ops Engineer</p>
+                                    <p className="tech-card-role">Software & Cloud Database Engineer</p>
                                     
                                     <div className="tech-card-tags">
-                                        <span><Database size={13} /> Oracle ATP / PL-SQL</span>
-                                        <span><Server size={13} /> Docker & Linux SRE</span>
-                                        <span><Cloud size={13} /> OCI / Cloudflare</span>
+                                        <span><Database size={13} /> PostgreSQL (RDS) & Oracle</span>
+                                        <span><Server size={13} /> Terraform & Flyway CI/CD</span>
+                                        <span><Cloud size={13} /> AWS / OCI & Docker</span>
                                     </div>
                                 </div>
                                 
