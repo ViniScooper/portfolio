@@ -10,7 +10,7 @@
   <style>
     @page {
       size: letter;
-      margin: 6mm 9mm;
+      margin: 5mm 8mm;
     }
 
     * {
@@ -23,8 +23,8 @@
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
       color: #000000;
       background: #ffffff;
-      line-height: 1.20;
-      font-size: 8.1pt;
+      line-height: 1.18;
+      font-size: 7.9pt;
       -webkit-font-smoothing: antialiased;
     }
 
@@ -78,35 +78,35 @@
 
     /* SECTION */
     .section {
-      margin-bottom: 5.5px;
+      margin-bottom: 4px;
     }
 
     .section-title {
-      font-size: 9pt;
+      font-size: 8.8pt;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.05em;
       border-bottom: 1px solid #000000;
       padding-bottom: 1px;
-      margin-bottom: 3.5px;
+      margin-bottom: 3px;
     }
 
     .summary-p {
-      font-size: 8.2pt;
-      line-height: 1.27;
+      font-size: 8pt;
+      line-height: 1.23;
       text-align: justify;
     }
 
     /* SKILLS */
     .skills-table {
       width: 100%;
-      font-size: 8.1pt;
-      line-height: 1.25;
+      font-size: 7.9pt;
+      line-height: 1.22;
     }
 
     .skills-table td {
       vertical-align: top;
-      padding-bottom: 1.5px;
+      padding-bottom: 1.2px;
     }
 
     .skill-category {
@@ -117,7 +117,7 @@
 
     /* EXPERIENCE & PROJECTS */
     .item {
-      margin-bottom: 4px;
+      margin-bottom: 3px;
     }
 
     .item-header {
@@ -227,28 +227,31 @@
 
       <div class="item">
         <div class="item-header">
-          <span class="item-left">Desenvolvedor de Software & Database Engineer <span class="item-company">— In Forma Software</span></span>
+          <span class="item-left">Database Administrator Pleno (DBA Pleno) <span class="item-company">— In Forma Software</span></span>
           <span class="item-right">Jul 2024 – Presente | Recife, Brasil</span>
         </div>
         <ul class="bullets">
-          <li>Atuação na sustentação, arquitetura e engenharia de bancos de dados em produção OLTP corporativos, garantindo SLA de 99.98% de disponibilidade em clusters <strong>PostgreSQL na AWS (RDS Multi-AZ)</strong> e Oracle.</li>
-          <li>Planejamento e execução de estratégias de <strong>migração de dados heterogêneas</strong> (Oracle para PostgreSQL na AWS) com mapeamento de tipos, conversão de schemas e replicação contínua (CDC / AWS DMS), mitigando indisponibilidade.</li>
-          <li>Administração e <strong>performance tuning de PostgreSQL</strong>: análise profunda de planos de execução (<code>EXPLAIN ANALYZE</code>), otimização de queries críticas via <code>pg_stat_statements</code>, ajuste fino de <strong>autovacuum</strong> para prevenção de table bloat e resolução ágil de locks concorrentes.</li>
-          <li>Implementação de <strong>Infraestrutura como Código (IaC) com Terraform</strong> para provisionamento padronizado de instâncias RDS PostgreSQL, DB subnet groups, parameter groups e regras de segurança.</li>
-          <li>Automação do ciclo de vida de banco de dados via <strong>Flyway integrado a pipelines de CI/CD</strong> (GitHub Actions), garantindo versionamento rigoroso de migrations (DDL/DML), testes automatizados e deploys contínuos sem conflito de schema.</li>
-          <li>Desenvolvimento de scripts de automação operacional em Python e Bash, reduzindo tarefas manuais em mais de 50%.</li>
+          <li>Administração de bancos de dados corporativos de missão crítica em produção OLTP (Oracle Database 19c/21c, Multitenant CDB/PDB e Data Guard), sustentando SLA de 99.98% de disponibilidade.</li>
+          <li>Planejamento e execução de migrações completas de banco de dados, criação e expansão de novas bases corporativas, upgrades de versão, clonagem e movimentação de dados via <strong>Oracle Data Pump (expdp/impdp)</strong> e <strong>RMAN (Recovery Manager)</strong>.</li>
+          <li>Engenharia e validação contínua de rotinas automatizadas de backup (Full, Incremental, Archivelogs), restore e Disaster Recovery (DR), garantindo recuperabilidade estrita e cumprimento de metas de RPO e RTO.</li>
+          <li>Performance Tuning avançado: diagnóstico profundo via relatórios AWR, ADDM e ASH, análise de Planos de Execução (Execution Plans), desfragmentação/rebuild de índices, eliminação de contenção de locks e otimização de I/O em queries críticas.</li>
+          <li>Governança, controle de acesso e auditoria de segurança RBAC, gerenciamento de storage/tablespaces, monitoramento proativo de métricas e sustentação N3 de incidentes críticos.</li>
+          <li>Desenvolvimento de scripts de automação operacional de rotinas de DBA utilizando Shell Scripting (Bash) e Python, reduzindo tarefas manuais em mais de 50%.</li>
         </ul>
       </div>
 
       <div class="item">
         <div class="item-header">
-          <span class="item-left">Database Administrator & Desenvolvedor de Dados <span class="item-company">— Cod.ERP Tecnologia LTDA</span></span>
+          <span class="item-left">Desenvolvedor de Software & Database Engineer <span class="item-company">— Cod.ERP Tecnologia LTDA</span></span>
           <span class="item-right">Mai 2023 – Mai 2024 | Recife, Brasil</span>
         </div>
         <ul class="bullets">
-          <li>Administração de bancos corporativos de alto volume transacional para plataformas ERP multi-empresa integradas a serviços em nuvem.</li>
-          <li>Construção e refatoração de queries SQL complexas, índices particionados, views materializadas e procedimentos de carga, eliminando gargalos de I/O e CPU em relatórios e rotinas de faturamento.</li>
-          <li>Supervisão de rotinas de integridade referencial, planos de Disaster Recovery, backups diferenciais/transacionais e suporte N3 a incidentes críticos de dados.</li>
+          <li>Atuação no desenvolvimento e modernização de banco de dados para plataformas ERP corporativas em nuvem, com foco em <strong>PostgreSQL na AWS (RDS Multi-AZ)</strong> e SQL Server.</li>
+          <li>Planejamento e execução de <strong>migrações de dados heterogêneas</strong> (SQL Server/Oracle para PostgreSQL na AWS) com mapeamento de tipos, conversão de schemas e replicação contínua via <strong>AWS DMS (Database Migration Service) e CDC</strong>.</li>
+          <li>Administração e <strong>performance tuning em PostgreSQL</strong>: profiling de queries com <code>EXPLAIN ANALYZE</code>, diagnóstico de top queries via <code>pg_stat_statements</code>, ajuste fino de <strong>autovacuum</strong> para prevenção de table bloat, connection pooling (PgBouncer) e resolução ágil de locks concorrentes.</li>
+          <li>Implementação de Infraestrutura como Código (<strong>IaC com Terraform</strong>) para provisionamento automatizado de instâncias RDS PostgreSQL, DB subnet groups, parameter groups e security groups.</li>
+          <li>Versionamento e automação de migração de schema com <strong>Flyway integrado a pipelines de CI/CD</strong> (GitHub Actions), garantindo deploys sem downtime e consistência estrita de DDL/DML entre ambientes.</li>
+          <li>Construção e otimização de queries SQL complexas, stored procedures, triggers e microsserviços de integração em Python.</li>
         </ul>
       </div>
 
