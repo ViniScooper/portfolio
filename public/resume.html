@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>José Vinícius Lourenço - Resume (Software Developer & Database Engineer)</title>
+  <title>José Vinícius Lourenço - Resume (Database Administrator & Cloud Engineer)</title>
   <meta name="author" content="José Vinícius Lourenço">
-  <meta name="subject" content="Mid-Level Software Developer, Database Engineer, PostgreSQL, AWS RDS, Oracle, Terraform, Flyway, AWS DMS">
-  <meta name="keywords" content="Software Developer, PostgreSQL, AWS RDS, Oracle, Terraform, Flyway, AWS DMS, Performance Tuning, Autovacuum, Locks, CI/CD, Linux, Docker, Python">
-  <meta name="description" content="Resume of José Vinícius Lourenço - Mid-Level Software Developer & Cloud Database Engineer">
+  <meta name="subject" content="Database Administrator, Oracle DBA, PostgreSQL, RMAN, Data Pump, Linux SRE, AWS RDS, Terraform, Flyway, AWS DMS">
+  <meta name="keywords" content="Oracle DBA, RMAN, Data Pump, Linux SRE, PostgreSQL, AWS RDS, Terraform, Flyway, AWS DMS, Performance Tuning, Autovacuum, Locks, CI/CD, Docker, Python">
+  <meta name="description" content="Resume of José Vinícius Lourenço - Database Administrator & Cloud Infrastructure Engineer">
   <style>
     @page {
       size: letter;
@@ -112,7 +112,7 @@
     .skill-category {
       font-weight: 700;
       white-space: nowrap;
-      width: 150px;
+      width: 160px;
     }
 
     /* EXPERIENCE & PROJECTS */
@@ -172,7 +172,7 @@
     <!-- HEADER -->
     <header class="header">
       <h1 class="name">José Vinícius Lourenço</h1>
-      <div class="title">Mid-Level Software Developer | Database & Cloud Engineer | PostgreSQL (AWS RDS), Oracle & Terraform</div>
+      <div class="title">Database Administrator & Cloud Engineer | Oracle DBA (RMAN & Data Pump), PostgreSQL (AWS RDS), Linux SRE & Terraform</div>
       <div class="contact-row">
         <span>vviniciuslourenco@gmail.com</span>
         <span class="sep">•</span>
@@ -190,7 +190,7 @@
     <section class="section">
       <h2 class="section-title">Professional Summary</h2>
       <p class="summary-p">
-        Software Developer and Database Engineer with 5+ years of experience engineering, supporting, and migrating mission-critical enterprise workloads across multi-cloud environments (AWS and OCI). Specialized in relational database ecosystems with extensive hands-on expertise in <strong>PostgreSQL (AWS RDS / Aurora Multi-AZ)</strong> and Oracle. Proven track record in orchestrating <strong>heterogeneous database migrations</strong> (Oracle/SQL Server to PostgreSQL using <strong>AWS DMS</strong>, AWS SCT, and CDC pipelines) with minimal downtime and guaranteed ACID compliance. Deep expertise in PostgreSQL administration, troubleshooting, and <strong>performance tuning</strong> (profiling via <code>EXPLAIN ANALYZE</code> and <code>pg_stat_statements</code>, fine-tuning <strong>autovacuum</strong> parameters, resolving deadlocks/locks, connection pooling with PgBouncer, and Read Replicas). Skilled in modern DevOps practices, including <strong>Terraform (IaC)</strong> for automated database provisioning, <strong>Flyway</strong> for database schema versioning within <strong>CI/CD pipelines</strong>, Python microservices, and Docker on Linux. Fluent in English, experienced collaborating with distributed global engineering teams in daily agile ceremonies.
+        Database Engineer and Infrastructure Reliability Specialist with 5+ years of experience engineering, supporting, and migrating mission-critical enterprise workloads across multi-cloud environments (AWS and OCI). Specialized in relational database ecosystems with extensive hands-on expertise as an <strong>Oracle DBA</strong>: Multitenant architecture (CDB/PDB), advanced Disaster Recovery with <strong>Oracle RMAN</strong> (Point-in-Time Recovery / PITR at PDB level, strict archivelog management, Mount-state recovery simulations, physical block validation via <code>RESTORE/RECOVER VALIDATE</code>, and <code>RESETLOGS</code> operations), and enterprise data migration with <strong>Oracle Data Pump (expdp/impdp)</strong>. Solid proficiency in <strong>PostgreSQL (AWS RDS / Aurora Multi-AZ)</strong>, orchestrating <strong>heterogeneous database migrations</strong> (Oracle/SQL Server to PostgreSQL using <strong>AWS DMS</strong>, AWS SCT, and CDC pipelines) with minimal downtime and strict ACID compliance. Deep expertise in <strong>Linux SRE (Ubuntu, Oracle Linux, RHEL)</strong>, automated operational workflows via Shell Scripting (Bash) and Python, <strong>Terraform (IaC)</strong> for automated database provisioning, <strong>Flyway</strong> for database schema versioning in <strong>CI/CD pipelines</strong>, and Docker. Fluent in English, experienced collaborating with distributed global engineering teams in daily agile ceremonies.
       </p>
     </section>
 
@@ -199,24 +199,24 @@
       <h2 class="section-title">Technical Skills</h2>
       <table class="skills-table">
         <tr>
-          <td class="skill-category">Databases:</td>
-          <td><strong>PostgreSQL (AWS RDS / Aurora Multi-AZ)</strong>, Oracle Database (19c/21c/ATP), Microsoft SQL Server, MongoDB Architecture, MySQL</td>
+          <td class="skill-category">Oracle DBA & Resilience:</td>
+          <td><strong>Oracle Database (19c/21c/ATP/23ai)</strong>, Multitenant Architecture (CDB/PDB), <strong>Oracle RMAN (Point-in-Time Recovery - PITR, Archivelogs, RESTORE/RECOVER VALIDATE, RESETLOGS)</strong>, <strong>Oracle Data Pump (expdp/impdp - REMAP_SCHEMA, compression, parallelism)</strong>, AWR/ASH/ADDM Profiling, Data Guard, Performance Tuning</td>
+        </tr>
+        <tr>
+          <td class="skill-category">PostgreSQL & Cloud Data:</td>
+          <td><strong>PostgreSQL (AWS RDS / Aurora Multi-AZ)</strong>, Performance Tuning (<code>EXPLAIN ANALYZE</code>, <code>pg_stat_statements</code>), Autovacuum Optimization, Lock & Deadlock Troubleshooting, PgBouncer, Read Replicas, Microsoft SQL Server, MongoDB Architecture, MySQL</td>
         </tr>
         <tr>
           <td class="skill-category">Migrations & CDC:</td>
           <td><strong>Heterogeneous Database Migrations (Oracle/SQL Server &rarr; PostgreSQL)</strong>, AWS DMS (Database Migration Service), AWS SCT, Change Data Capture (CDC), Debezium, Full Load & Ongoing Replication</td>
         </tr>
         <tr>
-          <td class="skill-category">PostgreSQL Tuning & SRE:</td>
-          <td><strong>Performance Tuning (EXPLAIN ANALYZE, pg_stat_statements)</strong>, Autovacuum Optimization, Lock & Deadlock Troubleshooting (<code>pg_locks</code>, <code>pg_stat_activity</code>), Advanced Indexing (B-Tree, GIN, Partial), PgBouncer, Read Replicas, Disaster Recovery (RPO/RTO)</td>
+          <td class="skill-category">Linux SRE & Automation:</td>
+          <td><strong>Advanced Linux Administration (Ubuntu, Oracle Linux, RHEL)</strong>, <strong>Shell Scripting (Bash)</strong>, Automated DBA Operational Workflows, Process Management, OS Diagnostics (I/O, Memory, Swap), Docker Containerization</td>
         </tr>
         <tr>
           <td class="skill-category">IaC, CI/CD & Cloud:</td>
-          <td><strong>Terraform (IaC for RDS, VPC, Subnets & Parameter Groups)</strong>, <strong>Flyway (Schema Versioning as Code)</strong>, GitHub Actions CI/CD, AWS (RDS, EC2, S3, CloudWatch), Oracle Cloud (OCI), Docker, Linux (Ubuntu/RHEL)</td>
-        </tr>
-        <tr>
-          <td class="skill-category">Development & Tools:</td>
-          <td>Python, Advanced SQL / PL-pgSQL, Shell Scripting (Bash), REST APIs, Data Observability, GitFlow, Scrum / Agile</td>
+          <td><strong>Terraform (IaC for RDS, VPC & Cloud Resources)</strong>, <strong>Flyway (Schema Versioning as Code)</strong>, GitHub Actions CI/CD, AWS (RDS, EC2, S3, CloudWatch), Oracle Cloud (OCI), Python, REST APIs, GitFlow, Scrum / Agile</td>
         </tr>
       </table>
     </section>
@@ -232,11 +232,11 @@
         </div>
         <ul class="bullets">
           <li>Administer enterprise mission-critical OLTP production databases (Oracle Database 19c/21c, Multitenant CDB/PDB, and Data Guard), sustaining 99.98% uptime SLA.</li>
-          <li>Plan and execute complex database migrations, database instance provisioning, version upgrades, cross-platform cloning, and data movement using <strong>Oracle Data Pump (expdp/impdp)</strong> and <strong>RMAN (Recovery Manager)</strong>.</li>
-          <li>Implement and continually validate automated transactional backup policies (Full, Incremental, Archivelogs), recovery drills, and Disaster Recovery (DR) plans to guarantee strict RPO and RTO compliance.</li>
+          <li>Architect and execute Disaster Recovery procedures with <strong>Oracle RMAN</strong>: automated transactional backup policies (Full, Incremental, Archivelogs), Mount-state recovery simulations, physical block integrity audits (<code>RESTORE DATABASE VALIDATE</code>, <code>RECOVER DATABASE TEST</code>), and <strong>Point-in-Time Recovery (PITR)</strong> with <code>RESETLOGS</code> PDB re-openings.</li>
+          <li>Plan and execute enterprise-scale database migrations, schema transfers, and data movement using <strong>Oracle Data Pump (expdp/impdp)</strong>, leveraging schema remapping (<code>REMAP_SCHEMA</code>), tablespace reallocation, dump file compression, and multithreaded parallelism to minimize maintenance windows.</li>
+          <li>Manage and troubleshoot high-availability <strong>Linux environments (Ubuntu, Oracle Linux, RHEL)</strong>, creating robust operational automation with <strong>Shell Scripting (Bash)</strong> and Python (smart CLI wrappers, automated instance health checks, and backup cron jobs), reducing manual intervention by over 50%.</li>
           <li>Conduct advanced Performance Tuning: deep profiling via AWR, ADDM, and ASH reports, Execution Plan analysis, index defragmentation/rebuilds, lock contention elimination, and I/O latency reduction on critical queries.</li>
           <li>Enforce data governance, RBAC security access auditing, storage/tablespace management, proactive health metrics tracking, and L3 incident troubleshooting.</li>
-          <li>Develop operational automation scripts for routine DBA workflows using Shell Scripting (Bash) and Python, reducing manual intervention by over 50%.</li>
         </ul>
       </div>
 
@@ -248,10 +248,10 @@
         <ul class="bullets">
           <li>Developed and modernized cloud database infrastructure for enterprise multi-tenant ERP platforms, focusing on <strong>PostgreSQL on AWS (RDS Multi-AZ)</strong> and SQL Server.</li>
           <li>Planned and executed <strong>heterogeneous database migrations</strong> (SQL Server/Oracle to PostgreSQL on AWS) incorporating data type mappings, schema refactoring, and continuous replication via <strong>AWS DMS (Database Migration Service) and CDC</strong>.</li>
-          <li>Led PostgreSQL administration and <strong>performance tuning</strong>: complex query profiling with <code>EXPLAIN ANALYZE</code>, hotspot identification via <code>pg_stat_statements</code>, fine-tuning <strong>autovacuum</strong> to eliminate table bloat, connection pooling with PgBouncer, and concurrent lock resolution.</li>
-          <li>Implemented Infrastructure as Code (<strong>IaC with Terraform</strong>) for automated, declarative provisioning of RDS PostgreSQL instances, DB subnet groups, custom parameter groups, and security groups.</li>
-          <li>Automated database schema versioning and lifecycle management using <strong>Flyway integrated into CI/CD pipelines</strong> (GitHub Actions), ensuring zero-downtime deployments and cross-environment DDL/DML consistency.</li>
-          <li>Authored and optimized complex SQL queries, stored procedures, triggers, and asynchronous integration microservices in Python.</li>
+          <li>Administered and conducted <strong>performance tuning in PostgreSQL</strong>: profiling queries with <code>EXPLAIN ANALYZE</code>, diagnosing top queries via <code>pg_stat_statements</code>, fine-tuning <strong>autovacuum</strong> to prevent table bloat, connection pooling (PgBouncer), and resolving concurrent locks.</li>
+          <li>Implemented Infrastructure as Code (<strong>IaC with Terraform</strong>) for automated provisioning of RDS PostgreSQL instances, DB subnet groups, parameter groups, and security groups.</li>
+          <li>Managed database schema versioning and deployment automation with <strong>Flyway integrated into CI/CD pipelines</strong> (GitHub Actions), ensuring zero-downtime releases and strict DDL/DML environment consistency.</li>
+          <li>Built and optimized complex SQL queries, stored procedures, triggers, and integration microservices in Python.</li>
         </ul>
       </div>
 
@@ -261,8 +261,8 @@
           <span class="item-right">Jan 2022 – Mar 2023 | Recife, Brazil</span>
         </div>
         <ul class="bullets">
-          <li>Developed transactional routines and integrated data streams with ERP backbones and relational databases for large-scale enterprise logistics.</li>
-          <li>Ensured relational consistency across internal tables and optimized operational reporting queries.</li>
+          <li>Developed transactional routines and data integrations connecting enterprise ERP systems and relational databases within a high-throughput logistics facility.</li>
+          <li>Validated transactional consistency and designed optimized relational schemas for operational reporting.</li>
         </ul>
       </div>
     </section>
@@ -273,22 +273,22 @@
 
       <div class="item">
         <div class="item-header">
-          <span class="item-left">CloudOps Hub — Multi-Cloud Control Plane & SRE Automation Engine</span>
+          <span class="item-left">CloudOps Hub — Multi-Cloud Management & SRE Automation Platform</span>
           <span class="item-right">Terraform, AWS, Docker, Fastify, React, PostgreSQL/Oracle ATP</span>
         </div>
         <ul class="bullets">
-          <li>Engineered a cloud management console (AWS EC2/RDS and OCI) with zero-agent SSH2 orchestration, real-time telemetry streaming, and automated self-healing with under 50 MB host RAM overhead.</li>
-          <li>Employed <strong>Terraform</strong> for repeatable database provisioning and automated schema evolution via <strong>Flyway</strong>.</li>
+          <li>Engineered cloud infrastructure control architecture (AWS EC2/RDS and OCI) with agentless SSH2 orchestration, live telemetry streaming, and automated self-healing triggers under 50 MB host RAM footprint.</li>
+          <li>Implemented declarative database provisioning via <strong>Terraform</strong> and automated continuous schema evolution via <strong>Flyway</strong>.</li>
         </ul>
       </div>
 
       <div class="item">
         <div class="item-header">
-          <span class="item-left">ByteData — Enterprise Data Integration & Migration Microservice</span>
+          <span class="item-left">ByteData — Enterprise Data Migration & Integration Microservice</span>
           <span class="item-right">Python, PostgreSQL (AWS RDS), Docker, REST APIs</span>
         </div>
         <ul class="bullets">
-          <li>Built an asynchronous data ingestion microservice consuming external REST APIs and persisting into <strong>PostgreSQL</strong> under strict ACID guarantees.</li>
+          <li>Developed high-throughput ingestion and transformation microservice processing heterogeneous enterprise REST payloads and persisting into <strong>PostgreSQL</strong> with strict ACID transactional guarantees.</li>
         </ul>
       </div>
     </section>
@@ -298,13 +298,13 @@
       <h2 class="section-title">Education, Certifications & Languages</h2>
       <div class="bottom-grid">
         <div>
-          <div class="edu-entry"><strong>Postgraduate Specialization in Cloud Computing Projects</strong> — Faculdade Descomplica Digital <em>(In Progress)</em></div>
-          <div class="edu-entry"><strong>Associate Degree in Systems Analysis and Development</strong> — Faculdade Descomplica Digital <em>(Graduated)</em></div>
-          <div class="edu-entry"><strong>Associate Degree in Systems Analysis and Development</strong> — UNINASSAU <em>(Graduated)</em></div>
+          <div class="edu-entry"><strong>Postgraduate Degree in Cloud Computing Projects</strong> — Faculdade Descomplica Digital <em>(In Progress)</em></div>
+          <div class="edu-entry"><strong>Associate Degree in Systems Analysis & Development</strong> — Faculdade Descomplica Digital <em>(Completed)</em></div>
+          <div class="edu-entry"><strong>Associate Degree in Systems Analysis & Development</strong> — UNINASSAU <em>(Completed)</em></div>
         </div>
         <div>
-          <div class="edu-entry"><strong>Certifications:</strong> AWS Cloud & Architecture Fundamentals • Google IT Support Professional • Oracle Cloud Infrastructure Foundations</div>
-          <div class="edu-entry"><strong>Languages:</strong> <strong>English (Advanced / Professional Working Proficiency)</strong> — Qualified to lead and collaborate in daily global engineering meetings • Portuguese (Native)</div>
+          <div class="edu-entry"><strong>Certifications & Training:</strong> AWS Cloud & Architecture Fundamentals • Google IT Support Professional • Oracle Cloud Infrastructure Foundations</div>
+          <div class="edu-entry"><strong>Languages:</strong> <strong>English (Advanced / Full Professional Proficiency)</strong> — Conducts and leads daily technical meetings with global teams • Portuguese (Native)</div>
         </div>
       </div>
     </section>

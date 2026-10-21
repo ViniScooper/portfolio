@@ -2,11 +2,11 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>José Vinícius Lourenço - Currículo (Desenvolvedor de Software & Engenheiro de Banco de Dados)</title>
+  <title>José Vinícius Lourenço - Currículo (Database Administrator & Cloud Engineer)</title>
   <meta name="author" content="José Vinícius Lourenço">
-  <meta name="subject" content="Desenvolvedor de Software PL, Engenheiro de Banco de Dados, PostgreSQL, AWS RDS, Oracle, Terraform, Flyway, AWS DMS">
-  <meta name="keywords" content="Desenvolvedor de Software, PostgreSQL, AWS RDS, Oracle, Terraform, Flyway, AWS DMS, Performance Tuning, Autovacuum, Locks, CI/CD, Linux, Docker, Python">
-  <meta name="description" content="Currículo de José Vinícius Lourenço - Desenvolvedor de Software PL & Engenheiro de Banco de Dados Cloud">
+  <meta name="subject" content="Database Administrator, Oracle DBA, PostgreSQL, RMAN, Data Pump, Linux SRE, AWS RDS, Terraform, Flyway, AWS DMS">
+  <meta name="keywords" content="Oracle DBA, RMAN, Data Pump, Linux SRE, PostgreSQL, AWS RDS, Terraform, Flyway, AWS DMS, Performance Tuning, Autovacuum, Locks, CI/CD, Docker, Python">
+  <meta name="description" content="Currículo de José Vinícius Lourenço - Database Administrator & Cloud Infrastructure Engineer">
   <style>
     @page {
       size: letter;
@@ -112,7 +112,7 @@
     .skill-category {
       font-weight: 700;
       white-space: nowrap;
-      width: 155px;
+      width: 165px;
     }
 
     /* EXPERIENCE & PROJECTS */
@@ -172,7 +172,7 @@
     <!-- HEADER -->
     <header class="header">
       <h1 class="name">José Vinícius Lourenço</h1>
-      <div class="title">Desenvolvedor de Software PL | Engenheiro de Banco de Dados & Cloud | PostgreSQL (AWS RDS), Oracle & Terraform</div>
+      <div class="title">Database Administrator & Cloud Engineer | Oracle DBA (RMAN & Data Pump), PostgreSQL (AWS RDS), Linux SRE & Terraform</div>
       <div class="contact-row">
         <span>vviniciuslourenco@gmail.com</span>
         <span class="sep">•</span>
@@ -190,7 +190,7 @@
     <section class="section">
       <h2 class="section-title">Resumo Profissional</h2>
       <p class="summary-p">
-        Desenvolvedor de Software e Engenheiro de Banco de Dados com 5+ anos de experiência na sustentação, modelagem e migração de ambientes corporativos de missão crítica em nuvem (AWS e OCI). Especialista em ecossistemas relacionais com sólida atuação prática em <strong>PostgreSQL (AWS RDS / Aurora)</strong> e Oracle, atuando no planejamento e execução de migrações heterogêneas de dados (Oracle/SQL Server para PostgreSQL via <strong>AWS DMS</strong>, AWS SCT e CDC) com zero perda de dados e downtime mínimo. Domínio aprofundado em administração, troubleshooting e <strong>performance tuning de PostgreSQL</strong> (análise via <code>EXPLAIN ANALYZE</code> e <code>pg_stat_statements</code>, ajuste de <strong>autovacuum</strong>, contenção de locks/deadlocks e connection pooling com PgBouncer). Vivência avançada em <strong>Infraestrutura como Código (Terraform)</strong> para provisionamento de recursos de banco, versionamento e automação de schema com <strong>Flyway</strong> em esteiras de <strong>CI/CD</strong>, microsserviços em Python e orquestração Docker em Linux. Inglês avançado para atuação em projetos globais e reuniões diárias.
+        Engenheiro de Banco de Dados e Administrador de Infraestrutura com 5+ anos de experiência na sustentação, modelagem, automação e migração de ambientes corporativos de missão crítica em nuvem (AWS e OCI). Sólida atuação prática como <strong>Oracle DBA</strong>, dominando arquitetura Multitenant (CDB/PDB), estratégias rigorosas de Disaster Recovery com <strong>Oracle RMAN</strong> (Point-in-Time Recovery - PITR a nível de PDB, retenção de Archivelogs, simulações em modo Mount, validações de blocos via <code>RESTORE/RECOVER VALIDATE</code> e abertura com <code>RESETLOGS</code>), além de movimentação e migrações lógicas com <strong>Oracle Data Pump (expdp/impdp)</strong>. Especialista também em <strong>PostgreSQL na AWS (RDS / Aurora Multi-AZ)</strong>, atuando no planejamento e execução de migrações heterogêneas de dados (Oracle/SQL Server para PostgreSQL via <strong>AWS DMS</strong>, AWS SCT e CDC) com downtime mínimo e integridade transacional estrita. Domínio de <strong>Linux SRE (Ubuntu, Oracle Linux, RHEL)</strong> com automações avançadas em Shell Scripting (Bash) e Python, <strong>Infraestrutura como Código (Terraform)</strong>, versionamento de schema com <strong>Flyway</strong> em esteiras de <strong>CI/CD</strong> e orquestração Docker. Inglês avançado para reuniões diárias e colaboração com equipes globais.
       </p>
     </section>
 
@@ -199,24 +199,24 @@
       <h2 class="section-title">Habilidades Técnicas</h2>
       <table class="skills-table">
         <tr>
-          <td class="skill-category">Bancos de Dados:</td>
-          <td><strong>PostgreSQL (AWS RDS / Aurora Multi-AZ)</strong>, Oracle Database (19c/21c/ATP), Microsoft SQL Server, MongoDB, MySQL</td>
+          <td class="skill-category">Oracle DBA & Resiliência:</td>
+          <td><strong>Oracle Database (19c/21c/ATP/23ai)</strong>, Arquitetura Multitenant (CDB/PDB), <strong>Oracle RMAN (Point-in-Time Recovery - PITR, Archivelogs, RESTORE/RECOVER VALIDATE, RESETLOGS)</strong>, <strong>Oracle Data Pump (expdp/impdp - REMAP_SCHEMA, compressão, paralelismo)</strong>, Relatórios AWR/ASH/ADDM, Data Guard, Performance Tuning</td>
+        </tr>
+        <tr>
+          <td class="skill-category">PostgreSQL & Cloud Data:</td>
+          <td><strong>PostgreSQL (AWS RDS / Aurora Multi-AZ)</strong>, Performance Tuning (<code>EXPLAIN ANALYZE</code>, <code>pg_stat_statements</code>), Otimização de Autovacuum, Gestão de Locks & Deadlocks, PgBouncer, Read Replicas, Microsoft SQL Server, MongoDB, MySQL</td>
         </tr>
         <tr>
           <td class="skill-category">Migrações & CDC:</td>
           <td><strong>Migrações Heterogêneas (Oracle/SQL Server &rarr; PostgreSQL)</strong>, AWS DMS (Database Migration Service), AWS SCT, Change Data Capture (CDC), Debezium, Carga Inicial & Replicação Contínua</td>
         </tr>
         <tr>
-          <td class="skill-category">PostgreSQL Tuning & Sustentação:</td>
-          <td><strong>Performance Tuning (EXPLAIN ANALYZE, pg_stat_statements)</strong>, Otimização de Autovacuum, Gestão de Locks & Deadlocks (<code>pg_locks</code>, <code>pg_stat_activity</code>), Índices (B-Tree, GIN, Parciais), PgBouncer, Read Replicas, Disaster Recovery (RPO/RTO)</td>
+          <td class="skill-category">Linux SRE & Automação:</td>
+          <td><strong>Linux Avançado (Ubuntu, Oracle Linux, RHEL)</strong>, <strong>Shell Scripting (Bash)</strong>, Automação de Rotinas de DBA, Gestão de Processos, Diagnóstico de I/O, Memória e Swap, Docker Containers</td>
         </tr>
         <tr>
           <td class="skill-category">IaC, CI/CD & Cloud:</td>
-          <td><strong>Terraform (IaC para RDS, VPC e Recursos Cloud)</strong>, <strong>Flyway (Versionamento de Schema)</strong>, GitHub Actions, AWS (RDS, EC2, S3, CloudWatch), Oracle Cloud (OCI), Docker, Linux (Ubuntu/RHEL)</td>
-        </tr>
-        <tr>
-          <td class="skill-category">Desenvolvimento & Métodos:</td>
-          <td>Python, SQL Avançado / PL-pgSQL, Shell Scripting (Bash), REST APIs, Observabilidade de Dados, GitFlow, Scrum/Agile</td>
+          <td><strong>Terraform (IaC para RDS, VPC e Cloud)</strong>, <strong>Flyway (Versionamento de Schema as Code)</strong>, GitHub Actions, AWS (RDS, EC2, S3, CloudWatch), Oracle Cloud (OCI), Python, REST APIs, GitFlow, Scrum/Agile</td>
         </tr>
       </table>
     </section>
@@ -232,11 +232,11 @@
         </div>
         <ul class="bullets">
           <li>Administração de bancos de dados corporativos de missão crítica em produção OLTP (Oracle Database 19c/21c, Multitenant CDB/PDB e Data Guard), sustentando SLA de 99.98% de disponibilidade.</li>
-          <li>Planejamento e execução de migrações completas de banco de dados, criação e expansão de novas bases corporativas, upgrades de versão, clonagem e movimentação de dados via <strong>Oracle Data Pump (expdp/impdp)</strong> e <strong>RMAN (Recovery Manager)</strong>.</li>
-          <li>Engenharia e validação contínua de rotinas automatizadas de backup (Full, Incremental, Archivelogs), restore e Disaster Recovery (DR), garantindo recuperabilidade estrita e cumprimento de metas de RPO e RTO.</li>
+          <li>Implementação e execução de estratégias de Disaster Recovery com <strong>Oracle RMAN</strong>: rotinas automatizadas de backup (Full, Incremental, Archivelogs), simulação de restaurações em modo Mount, validações de integridade física (<code>RESTORE DATABASE VALIDATE</code>, <code>RECOVER DATABASE TEST</code>) e recuperação em ponto no tempo (<strong>Point-in-Time Recovery / PITR</strong>) com abertura de PDBs em <code>RESETLOGS</code>.</li>
+          <li>Planejamento e execução de migrações e movimentações em massa de dados corporativos via <strong>Oracle Data Pump (expdp/impdp)</strong>, aplicando remapeamento de esquemas (<code>REMAP_SCHEMA</code>), migração de tablespaces, compactação de dump files e paralelismo para redução drástica de janela de manutenção.</li>
+          <li>Administração aprofundada de servidores <strong>Linux (Ubuntu, Oracle Linux e RHEL)</strong> e desenvolvimento de scripts de automação operacional em <strong>Shell Scripting (Bash)</strong> e Python (wrappers inteligentes, cronjobs de backup e auditorias de integridade), reduzindo tarefas manuais em mais de 50%.</li>
           <li>Performance Tuning avançado: diagnóstico profundo via relatórios AWR, ADDM e ASH, análise de Planos de Execução (Execution Plans), desfragmentação/rebuild de índices, eliminação de contenção de locks e otimização de I/O em queries críticas.</li>
           <li>Governança, controle de acesso e auditoria de segurança RBAC, gerenciamento de storage/tablespaces, monitoramento proativo de métricas e sustentação N3 de incidentes críticos.</li>
-          <li>Desenvolvimento de scripts de automação operacional de rotinas de DBA utilizando Shell Scripting (Bash) e Python, reduzindo tarefas manuais em mais de 50%.</li>
         </ul>
       </div>
 

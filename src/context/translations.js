@@ -8,13 +8,13 @@ export const translations = {
         },
         hero: {
             title1: "SOFTWARE & DATABASE ENGINEER",
-            title2: "| POSTGRESQL & CLOUD | TERRAFORM & CI/CD",
-            subtitle: "Desenvolvedor de Software e Engenheiro de Banco de Dados especializado em PostgreSQL (AWS RDS / Aurora), Oracle e automação de infraestrutura com Terraform. Experiência sólida em migrações heterogêneas de banco de dados (AWS DMS / CDC), tuning de performance (autovacuum, locks), CI/CD com Flyway e Docker.",
+            title2: "| ORACLE & POSTGRESQL | RMAN, DATA PUMP & LINUX SRE",
+            subtitle: "Engenheiro de Banco de Dados e Desenvolvedor especializado em Oracle (19c/21c/ATP) e PostgreSQL (AWS RDS / Aurora). Forte atuação prática em Oracle RMAN (Point-in-Time Recovery, Archivelogs, Restore/Recover Validate), Oracle Data Pump (expdp/impdp), Linux SRE (Ubuntu/Oracle Linux), migrações heterogêneas de dados (AWS DMS / CDC) e automação de infraestrutura com Terraform e Docker.",
             remote: "Disponível para oportunidades Híbridas (SP) e Remotas Globais"
         },
         about: {
             title: "DESENVOLVEDOR DE SOFTWARE & ENGENHEIRO DE BANCO DE DADOS CLOUD",
-            description: "Especialista em bancos de dados corporativos e desenvolvimento de software com 5+ anos de experiência na sustentação e evolução de ambientes críticos. Forte domínio em PostgreSQL na AWS (RDS / Aurora Multi-AZ) e Oracle, atuando em migrações heterogêneas de banco de dados (AWS DMS / CDC), otimização de queries (EXPLAIN ANALYZE, pg_stat_statements), tuning de autovacuum, mitigação de locks e IaC com Terraform. Experiência contínua com versionamento de schema em esteiras CI/CD utilizando Flyway, além de APIs em Python e microsserviços em containers. Inglês avançado para reuniões diárias e colaboração com times globais.",
+            description: "Especialista em bancos de dados corporativos e confiabilidade de infraestrutura com 5+ anos de experiência na sustentação, automação e evolução de ambientes críticos. Forte domínio em Oracle Database (19c/21c/ATP/23ai) e PostgreSQL na AWS (RDS / Aurora Multi-AZ). Atuação comprovada em Disaster Recovery avançado com Oracle RMAN (Point-in-Time Recovery, gestão rigorosa de Archivelogs, validações físicas e simulações em modo Mount), migrações e movimentações lógicas com Oracle Data Pump (expdp/impdp com REMAP e compressão), administração Linux SRE (Ubuntu, Oracle Linux, Shell Scripting avançado), migrações heterogêneas (AWS DMS / CDC), query tuning (AWR, ASH, EXPLAIN ANALYZE) e IaC com Terraform. Experiência contínua com versionamento de schema em esteiras CI/CD com Flyway, microsserviços em Python e orquestração Docker. Inglês avançado para reuniões diárias e colaboração com times globais.",
             stats: [
                 { label: "ANOS COM TECNOLOGIA & DADOS", value: "5+" },
                 { label: "BANCOS OTIMIZADOS", value: "50+" },
@@ -23,27 +23,27 @@ export const translations = {
         },
         skillLists: [
             {
-                title: "DATABASE & CLOUD DATA",
-                skills: ["PostgreSQL (AWS RDS / Aurora)", "Oracle Database (19c/21c/ATP)", "SQL Server (T-SQL)", "MySQL & MongoDB", "AWS DMS & CDC Migrations"]
+                title: "ORACLE DBA & DATA PUMP",
+                skills: ["Oracle Database (19c/21c/ATP/23ai)", "RMAN (PITR, Archivelogs, Validation)", "Data Pump (expdp / impdp)", "Multitenant (CDB / PDB)", "AWR, ADDM & ASH Performance Tuning"]
             },
             {
-                title: "TUNING & RELIABILITY",
-                skills: ["Query Tuning (EXPLAIN ANALYZE)", "Autovacuum & Lock Troubleshooting", "pg_stat_statements & PgBouncer", "Read Replicas & High Availability", "Data Modeling & Indexing Strategies"]
+                title: "POSTGRESQL & CLOUD DATA",
+                skills: ["PostgreSQL (AWS RDS / Aurora)", "AWS DMS & CDC Migrations", "Query Tuning (EXPLAIN ANALYZE)", "Autovacuum & Lock Mitigation", "PgBouncer & Read Replicas"]
             },
             {
-                title: "IAC, DEVOPS & CI/CD",
-                skills: ["Terraform (IaC para RDS e Cloud)", "Flyway (Schema Migrations as Code)", "CI/CD Pipelines (GitHub Actions)", "Docker & Linux (Ubuntu/RHEL)", "Python & Shell Scripting (Bash)"]
+                title: "LINUX SRE, IAC & CI/CD",
+                skills: ["Linux SRE (Ubuntu / Oracle Linux / RHEL)", "Shell Scripting (Bash) & Python", "Terraform (IaC para Cloud)", "Flyway (Schema as Code)", "Docker & CI/CD Pipelines"]
             }
         ],
         skills: {
             title: "HABILIDADES & EXPERTISE",
             cards: [
+                { title: "Oracle RMAN & Disaster Recovery", desc: "Arquitetura e execução de backups Full/Incremental com Archivelogs, Point-in-Time Recovery (PITR) a nível de CDB/PDB, validação de blocos (RESTORE/RECOVER VALIDATE) e abertura com RESETLOGS sem perda de integridade." },
+                { title: "Oracle Data Pump & Migrações Lógicas", desc: "Movimentação em larga escala de dados corporativos via expdp/impdp, remapeamento de esquemas (REMAP_SCHEMA), migração de tablespaces, paralelismo e compressão de dump files." },
+                { title: "Linux SRE & Automação Operacional", desc: "Administração aprofundada de servidores Linux (Ubuntu, Oracle Linux e RHEL), automação de rotinas críticas de DBA em Shell Scripting (Bash), diagnóstico de I/O, memória e gestão de containers Docker." },
                 { title: "PostgreSQL & AWS RDS em Produção", desc: "Administração e sustentação de instâncias AWS RDS e Aurora PostgreSQL com Multi-AZ, Read Replicas, backups e alta disponibilidade." },
-                { title: "Migrações Heterogêneas (AWS DMS & CDC)", desc: "Planejamento e execução de migrações entre motores diferentes (Oracle/SQL Server para PostgreSQL) com carga inicial e replicação contínua." },
-                { title: "Performance Tuning & Autovacuum", desc: "Análise avançada de planos de execução (EXPLAIN ANALYZE), diagnóstico via pg_stat_statements, tuning de autovacuum e mitigação de locks." },
-                { title: "Infraestrutura como Código (Terraform)", desc: "Provisionamento declarativo e reprodutível de instâncias RDS, DB subnet groups, parameter groups e recursos cloud por código." },
-                { title: "CI/CD & Versionamento com Flyway", desc: "Gerenciamento e automação de migração de schema (Database Migrations as Code) com Flyway integrado em pipelines de CI/CD." },
-                { title: "Bancos de Missão Crítica & Resiliência", desc: "Sustentação 24/7 de bases OLTP de alta concorrência com planos de Disaster Recovery aderentes a SLAs rígidos de RPO e RTO." }
+                { title: "Performance Tuning & Diagnóstico", desc: "Análise profunda via relatórios AWR/ASH/ADDM no Oracle e EXPLAIN ANALYZE/pg_stat_statements no PostgreSQL, tuning de autovacuum e mitigação de contenção de locks." },
+                { title: "IaC, CI/CD & Schema com Flyway", desc: "Provisionamento declarativo de infraestrutura com Terraform e versionamento automatizado de schema (Database Migrations as Code) via Flyway integrado em pipelines de CI/CD." }
             ]
         },
         works: {
@@ -81,13 +81,13 @@ export const translations = {
         },
         hero: {
             title1: "SOFTWARE & DATABASE ENGINEER",
-            title2: "| POSTGRESQL & CLOUD | TERRAFORM & CI/CD",
-            subtitle: "Software Developer and Database Engineer specialized in PostgreSQL (AWS RDS / Aurora), Oracle, and infrastructure automation with Terraform. Solid hands-on experience in heterogeneous database migrations (AWS DMS / CDC), performance tuning (autovacuum, locks), CI/CD with Flyway, and Docker.",
+            title2: "| ORACLE & POSTGRESQL | RMAN, DATA PUMP & LINUX SRE",
+            subtitle: "Database Engineer and Software Developer specialized in Oracle (19c/21c/ATP) and PostgreSQL (AWS RDS / Aurora). Strong hands-on expertise in Oracle RMAN (Point-in-Time Recovery, Archivelogs, Restore/Recover Validate), Oracle Data Pump (expdp/impdp), Linux SRE (Ubuntu/Oracle Linux), heterogeneous database migrations (AWS DMS / CDC), and infrastructure automation with Terraform and Docker.",
             remote: "Available for Hybrid (SP) and Global Remote Opportunities"
         },
         about: {
             title: "SOFTWARE DEVELOPER & CLOUD DATABASE ENGINEER",
-            description: "Enterprise database specialist and software developer with 5+ years of experience engineering, supporting, and migrating mission-critical workloads. Extensive experience in PostgreSQL on AWS (RDS / Aurora Multi-AZ) and Oracle, orchestrating heterogeneous database migrations (AWS DMS / CDC), execution plan profiling (EXPLAIN ANALYZE, pg_stat_statements), autovacuum fine-tuning, lock troubleshooting, and IaC with Terraform. Experienced managing database schema migrations as code with Flyway in automated CI/CD pipelines, Python microservices, and Docker on Linux. Advanced English for daily agile meetings with global teams.",
+            description: "Enterprise database specialist and site reliability engineer with 5+ years of experience engineering, supporting, and migrating mission-critical workloads. Extensive experience in Oracle Database (19c/21c/ATP/23ai) and PostgreSQL on AWS (RDS / Aurora Multi-AZ). Proven track record in advanced Disaster Recovery with Oracle RMAN (Point-in-Time Recovery, strict archivelog policies, physical block validation, and Mount-state recovery simulations), logical data movement with Oracle Data Pump (expdp/impdp with REMAP and compression), Linux SRE administration (Ubuntu, Oracle Linux, advanced Bash scripting), heterogeneous migrations (AWS DMS / CDC), query profiling (AWR, ASH, EXPLAIN ANALYZE), and IaC with Terraform. Experienced managing database schema migrations as code with Flyway in automated CI/CD pipelines, Python microservices, and Docker. Advanced English for daily agile meetings with global teams.",
             stats: [
                 { label: "YEARS WITH TECH & DATA", value: "5+" },
                 { label: "OPTIMIZED DATABASES", value: "50+" },
@@ -96,27 +96,27 @@ export const translations = {
         },
         skillLists: [
             {
-                title: "DATABASE & CLOUD DATA",
-                skills: ["PostgreSQL (AWS RDS / Aurora)", "Oracle Database (19c/21c/ATP)", "SQL Server (T-SQL)", "MySQL & MongoDB", "AWS DMS & CDC Migrations"]
+                title: "ORACLE DBA & DATA PUMP",
+                skills: ["Oracle Database (19c/21c/ATP/23ai)", "RMAN (PITR, Archivelogs, Validation)", "Data Pump (expdp / impdp)", "Multitenant (CDB / PDB)", "AWR, ADDM & ASH Performance Tuning"]
             },
             {
-                title: "TUNING & RELIABILITY",
-                skills: ["Query Tuning (EXPLAIN ANALYZE)", "Autovacuum & Lock Troubleshooting", "pg_stat_statements & PgBouncer", "Read Replicas & High Availability", "Data Modeling & Indexing Strategies"]
+                title: "POSTGRESQL & CLOUD DATA",
+                skills: ["PostgreSQL (AWS RDS / Aurora)", "AWS DMS & CDC Migrations", "Query Tuning (EXPLAIN ANALYZE)", "Autovacuum & Lock Mitigation", "PgBouncer & Read Replicas"]
             },
             {
-                title: "IAC, DEVOPS & CI/CD",
-                skills: ["Terraform (IaC for RDS & Cloud)", "Flyway (Schema Migrations as Code)", "CI/CD Pipelines (GitHub Actions)", "Docker & Linux (Ubuntu/RHEL)", "Python & Shell Scripting (Bash)"]
+                title: "LINUX SRE, IAC & CI/CD",
+                skills: ["Linux SRE (Ubuntu / Oracle Linux / RHEL)", "Shell Scripting (Bash) & Python", "Terraform (IaC for Cloud)", "Flyway (Schema as Code)", "Docker & CI/CD Pipelines"]
             }
         ],
         skills: {
             title: "SKILLS & EXPERTISE",
             cards: [
+                { title: "Oracle RMAN & Disaster Recovery", desc: "Architecture and execution of Full/Incremental backups with Archivelogs, Point-in-Time Recovery (PITR) at CDB/PDB level, block validation (RESTORE/RECOVER VALIDATE), and OPEN RESETLOGS with zero data corruption." },
+                { title: "Oracle Data Pump & Logical Migrations", desc: "Large-scale enterprise data movement via expdp/impdp, schema remapping (REMAP_SCHEMA), tablespace migrations, parallel execution, and dump file compression." },
+                { title: "Linux SRE & Operational Automation", desc: "In-depth Linux system administration (Ubuntu, Oracle Linux, RHEL), automated mission-critical DBA routines with Shell Scripting (Bash), I/O and memory troubleshooting, and Docker containerization." },
                 { title: "PostgreSQL & AWS RDS in Production", desc: "Administration and reliability engineering for AWS RDS and Aurora PostgreSQL with Multi-AZ, Read Replicas, backups, and high availability." },
-                { title: "Heterogeneous Migrations (AWS DMS & CDC)", desc: "Planning and execution of cross-engine migrations (Oracle/SQL Server to PostgreSQL) using full-load and continuous CDC replication." },
-                { title: "Performance Tuning & Autovacuum", desc: "Deep profiling using EXPLAIN ANALYZE, telemetry via pg_stat_statements, autovacuum fine-tuning, and transaction lock resolution." },
-                { title: "Infrastructure as Code (Terraform)", desc: "Declarative and repeatable provisioning of RDS instances, DB subnet groups, custom parameter groups, and security rules." },
-                { title: "CI/CD & Schema Evolution with Flyway", desc: "Automated database schema migrations as code using Flyway integrated into continuous delivery pipelines." },
-                { title: "Mission-Critical Systems & Resilience", desc: "24/7 operations on high-concurrency OLTP engines with strict disaster recovery plans meeting stringent RPO and RTO SLAs." }
+                { title: "Performance Tuning & Diagnostics", desc: "Deep profiling using AWR/ASH/ADDM reports in Oracle and EXPLAIN ANALYZE/pg_stat_statements in PostgreSQL, autovacuum fine-tuning, and transaction lock resolution." },
+                { title: "IaC, CI/CD & Schema Evolution with Flyway", desc: "Declarative infrastructure provisioning with Terraform and automated database schema migrations as code using Flyway integrated into continuous delivery pipelines." }
             ]
         },
         works: {
