@@ -1,5 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useLanguage } from '../context/LanguageContext';
+import {
+    neofetch, help, whoami, gitLog, kubectlSkills, rmanDemo, expdpDemo,
+    getUptime, ls, readme, sudoRm, AUTOCOMPLETE
+} from './terminal/commands';
 import { 
   Terminal, 
   Database, 
@@ -291,7 +295,9 @@ const TechHero = () => {
 
     // Interactive CLI State
     const [cliInput, setCliInput] = useState('');
-    const [cliOutput, setCliOutput] = useState(null);
+    // Log rolável do terminal: [{ cmd, out }]
+    const [cliLog, setCliLog] = useState(() => [{ cmd: 'neofetch', out: neofetch(language) }]);
+    const cliLogRef = useRef(null);
     const [cmdHistory, setCmdHistory] = useState([]);
     const [historyIdx, setHistoryIdx] = useState(-1);
     const [copiedEmail, setCopiedEmail] = useState(false);
@@ -325,11 +331,7 @@ const TechHero = () => {
             e.preventDefault();
             const val = cliInput.trim().toLowerCase();
             if (!val) return;
-            const availableCmds = [
-                'help', 'whoami', 'projects', 'about', 'arch', 
-                'cv pt', 'cv en', 'contact', 'copy email', 'clear'
-            ];
-            const match = availableCmds.find(c => c.startsWith(val));
+            const match = AUTOCOMPLETE.find(c => c.startsWith(val));
             if (match) {
                 setCliInput(match);
             }
@@ -363,12 +365,9 @@ const TechHero = () => {
 
     // Animação Count-up Sobre Mim
     useEffect(() => {
-        if (view === 'terminal_about') {
-            setAnimatedYears(0);
-            setAnimatedDbs(0);
-            setAnimatedUptime('0.0');
+        if (view !== 'terminal_about') return;
 
-            const start = performance.now();
+        const start = performance.now();
             const duration = 1200;
 
             const frame = (now) => {
@@ -389,9 +388,8 @@ const TechHero = () => {
                 }
             };
 
-            const reqId = requestAnimationFrame(frame);
-            return () => cancelAnimationFrame(reqId);
-        }
+        const reqId = requestAnimationFrame(frame);
+        return () => cancelAnimationFrame(reqId);
     }, [view]);
 
     const nextImage = () => {
@@ -404,78 +402,95 @@ const TechHero = () => {
         setCurrentImageIdx((prev) => (prev - 1 + cloudHubSlides.length) % cloudHubSlides.length);
     };
 
-    // Processador de Comandos CLI
+    // Processador de Comandos CLI (log acumulado estilo terminal real)
     const executeCliCommand = (cmdStr) => {
-        const cleanCmd = cmdStr.trim().toLowerCase();
+        const rawCmd = cmdStr.trim();
+        const cleanCmd = rawCmd.toLowerCase();
         if (!cleanCmd) return;
 
-        // Adiciona ao histórico do terminal
-        setCmdHistory((prev) => [cmdStr.trim(), ...prev.filter(c => c !== cmdStr.trim())]);
+        setCmdHistory((prev) => [rawCmd, ...prev.filter(c => c !== rawCmd)]);
         setHistoryIdx(-1);
+        setCliInput('');
 
         if (cleanCmd === 'clear' || cleanCmd === 'cls') {
-            setCliOutput(null);
-            setCliInput('');
+            setCliLog([]);
             return;
         }
 
+        const pt = language === 'pt';
+        let out;
+
         if (cleanCmd === 'help') {
-            setCliOutput(
-                language === 'pt'
-                    ? "Comandos disponíveis:\n• whoami        -> Ver perfil profissional\n• projects      -> Abrir projeto CloudOps Hub\n• about         -> Ler sobre trajetória e carreira\n• arch          -> Visualizar arquitetura do sistema\n• cv pt / cv en -> Baixar currículo em PDF (Português / Inglês)\n• contact       -> Canais de contato direto\n• copy email    -> Copiar e-mail para a área de transferência\n• clear         -> Limpar saída\n(Dica: Pressione Tab para autocompletar e ↑/↓ para navegar no histórico)"
-                    : "Available commands:\n• whoami        -> View professional profile\n• projects      -> Inspect CloudOps Hub project\n• about         -> Read career background\n• arch          -> View system architecture diagram\n• cv pt / cv en -> Download resume in PDF (Portuguese / English)\n• contact       -> Direct contact channels\n• copy email    -> Copy e-mail to clipboard\n• clear         -> Clear output\n(Tip: Press Tab to autocomplete and ↑/↓ to navigate history)"
-            );
+            out = help(language);
         } else if (cleanCmd === 'whoami') {
-            setCliOutput(
-                language === 'pt'
-                    ? "José Vinícius Lourenço — Software Developer & Database Engineer\n• 5+ anos com bancos em produção (PostgreSQL na AWS RDS, Oracle, SQL Server)\n• Migrações heterogêneas de banco de dados (AWS DMS / CDC) e Performance Tuning (autovacuum, locks)\n• Automação de infraestrutura por código (Terraform IaC) e versionamento de schema (Flyway)\n• Criador do CloudOps Hub — Console de Gestão Multi-Cloud com IA"
-                    : "José Vinícius Lourenço — Software Developer & Database Engineer\n• 5+ years with production databases (PostgreSQL on AWS RDS, Oracle, SQL Server)\n• Heterogeneous database migrations (AWS DMS / CDC) & Performance Tuning (autovacuum, locks)\n• Infrastructure as Code (Terraform IaC) & schema evolution pipelines (Flyway)\n• Creator of CloudOps Hub — Multi-Cloud DevOps Control Plane with AI"
-            );
+            out = whoami(language);
+        } else if (cleanCmd === 'neofetch') {
+            out = neofetch(language);
+        } else if (cleanCmd.startsWith('git log') || cleanCmd === 'experience') {
+            out = gitLog(language);
+        } else if (cleanCmd.startsWith('kubectl') || cleanCmd === 'skills') {
+            out = kubectlSkills();
+        } else if (cleanCmd.startsWith('rman')) {
+            out = rmanDemo(language);
+        } else if (cleanCmd.startsWith('expdp') || cleanCmd.startsWith('impdp') || cleanCmd === 'datapump') {
+            out = expdpDemo(language);
+        } else if (cleanCmd === 'uptime') {
+            out = getUptime(language);
+        } else if (cleanCmd === 'ls' || cleanCmd === 'ls -la' || cleanCmd === 'll') {
+            out = ls();
+        } else if (cleanCmd.startsWith('cat readme')) {
+            out = readme(language);
+        } else if (cleanCmd === 'history') {
+            out = [rawCmd, ...cmdHistory].slice().reverse().map((c, i) => `  ${String(i + 1).padStart(3)}  ${c}`).join('\n');
+        } else if (cleanCmd === 'date') {
+            out = new Date().toString();
         } else if (cleanCmd === 'projects' || cleanCmd === 'cloudops') {
             setView('terminal_project');
             setShowArchitecture(false);
-            setCliOutput(language === 'pt' ? "Abrindo CloudOps Hub..." : "Opening CloudOps Hub...");
+            out = pt ? 'Abrindo CloudOps Hub...' : 'Opening CloudOps Hub...';
         } else if (cleanCmd === 'about' || cleanCmd === 'cat') {
             setView('terminal_about');
-            setCliOutput(language === 'pt' ? "Abrindo sobre_mim.md..." : "Opening sobre_mim.md...");
+            out = pt ? 'Abrindo sobre_mim.md...' : 'Opening sobre_mim.md...';
         } else if (cleanCmd === 'arch' || cleanCmd === 'architecture') {
             setView('terminal_project');
             setShowArchitecture(true);
-            setCliOutput(language === 'pt' ? "Exibindo diagrama de arquitetura..." : "Displaying architecture diagram...");
+            out = pt ? 'Exibindo diagrama de arquitetura...' : 'Displaying architecture diagram...';
         } else if (cleanCmd.includes('cv') || cleanCmd.includes('curl') || cleanCmd.includes('pdf')) {
-            if (cleanCmd.includes('pt') || (cleanCmd === 'cv' && language === 'pt')) {
+            if (cleanCmd.includes('pt') || (cleanCmd === 'cv' && pt)) {
                 window.open('/curriculo_pt.pdf', '_blank');
-                setCliOutput(language === 'pt' ? "Iniciando download de curriculo_pt.pdf (Português)..." : "Downloading curriculo_pt.pdf (Portuguese)...");
+                out = pt ? 'Iniciando download de curriculo_pt.pdf (Português)...' : 'Downloading curriculo_pt.pdf (Portuguese)...';
             } else {
                 window.open('/curriculo_en.pdf', '_blank');
-                setCliOutput(language === 'pt' ? "Iniciando download de curriculo_en.pdf (English)..." : "Downloading curriculo_en.pdf (English)...");
+                out = pt ? 'Iniciando download de curriculo_en.pdf (English)...' : 'Downloading curriculo_en.pdf (English)...';
             }
         } else if (cleanCmd === 'contact') {
-            setCliOutput(
-                `José Vinícius Lourenço\n• E-mail: vviniciuslourenco@gmail.com\n• WhatsApp: +55 81 99512-6839\n• LinkedIn: linkedin.com/in/jose-vinicius-lourenço-1a6b9014a/\n• GitHub: github.com/ViniScooper\n• Local: Recife, PE, Brasil (Disponível para Trabalho Remoto Global)`
-            );
+            out = `José Vinícius Lourenço\n• E-mail: vviniciuslourenco@gmail.com\n• WhatsApp: +55 81 99512-6839\n• LinkedIn: linkedin.com/in/jose-vinicius-lourenço-1a6b9014a/\n• GitHub: github.com/ViniScooper\n• ${pt ? 'Local: Recife, PE, Brasil (Remoto Global)' : 'Location: Recife, PE, Brazil (Global Remote)'}`;
         } else if (cleanCmd.includes('copy') || cleanCmd === 'email') {
             handleCopyEmail();
-            setCliOutput(
-                language === 'pt'
-                    ? "vviniciuslourenco@gmail.com copiado para a área de transferência! ✅"
-                    : "vviniciuslourenco@gmail.com copied to clipboard! ✅"
-            );
+            out = pt
+                ? 'vviniciuslourenco@gmail.com copiado para a área de transferência! ✅'
+                : 'vviniciuslourenco@gmail.com copied to clipboard! ✅';
+        } else if (cleanCmd.startsWith('sudo rm') || cleanCmd.startsWith('rm -rf')) {
+            out = sudoRm(language);
         } else if (cleanCmd.startsWith('sudo')) {
-            setCliOutput(
-                language === 'pt'
-                    ? "bash: sudo: permissão negada. Este nó está sob guarda e monitoramento ativo 24/7 pelo SRE Watchdog 🛡️"
-                    : "bash: sudo: permission denied. This cluster is under 24/7 active SRE Watchdog protection 🛡️"
-            );
+            out = pt
+                ? 'bash: sudo: permissão negada. Este nó está sob monitoramento 24/7 pelo SRE Watchdog 🛡️'
+                : 'bash: sudo: permission denied. This node is under 24/7 SRE Watchdog protection 🛡️';
         } else {
-            setCliOutput(
-                language === 'pt'
-                    ? `bash: comando não encontrado: "${cleanCmd}". Digite "help" para ver a lista de comandos.`
-                    : `bash: command not found: "${cleanCmd}". Type "help" to see available commands.`
-            );
+            out = pt
+                ? `bash: ${cleanCmd}: comando não encontrado. Digite "help".`
+                : `bash: ${cleanCmd}: command not found. Type "help".`;
         }
-        setCliInput('');
+
+        setCliLog((prev) => [...prev, { cmd: rawCmd, out }].slice(-30));
     };
+
+    // Auto-scroll do log para a última saída
+    useEffect(() => {
+        if (cliLogRef.current) {
+            cliLogRef.current.scrollTop = cliLogRef.current.scrollHeight;
+        }
+    }, [cliLog]);
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
@@ -647,7 +662,7 @@ const TechHero = () => {
                         {/* CLI Interativo com Chips de Comandos */}
                         <div className="terminal-interactive-cli">
                             <form onSubmit={handleFormSubmit} className="terminal-cli-form">
-                                <span className="prompt-green">vini@recife</span>:<span className="prompt-blue">~</span>$&nbsp;
+                                <span className="prompt-green">vini@dba-node-01</span>:<span className="prompt-blue">~</span>$&nbsp;
                                 <input 
                                     type="text" 
                                     value={cliInput}
@@ -656,7 +671,7 @@ const TechHero = () => {
                                         if (historyIdx !== -1) setHistoryIdx(-1);
                                     }}
                                     onKeyDown={handleInputKeyDown}
-                                    placeholder={language === 'pt' ? 'Digite "help", "whoami", "cv pt", "cv en", "contact"... (Tab completa, ↑ histórico)' : 'Type "help", "whoami", "cv pt", "cv en", "contact"... (Tab to complete, ↑ history)'}
+                                    placeholder={language === 'pt' ? 'Digite "help", "git log", "rman", "neofetch"... (Tab completa, ↑ histórico)' : 'Type "help", "git log", "rman", "neofetch"... (Tab to complete, ↑ history)'}
                                     className="terminal-cli-input"
                                 />
                                 <button type="submit" style={{ background: 'none', border: 'none', color: '#20d6c7', cursor: 'pointer', padding: 0 }} title="Executar">
@@ -668,20 +683,30 @@ const TechHero = () => {
                             <div className="terminal-cmd-chips">
                                 <span className="terminal-cmd-chip-label">{language === 'pt' ? 'Atalhos:' : 'Quick:'}</span>
                                 <button type="button" className="terminal-cmd-chip" onClick={() => executeCliCommand('help')}>help</button>
-                                <button type="button" className="terminal-cmd-chip" onClick={() => executeCliCommand('whoami')}>whoami</button>
+                                <button type="button" className="terminal-cmd-chip" onClick={() => executeCliCommand('git log')}>git log</button>
+                                <button type="button" className="terminal-cmd-chip" onClick={() => executeCliCommand('kubectl get skills')}>kubectl get skills</button>
+                                <button type="button" className="terminal-cmd-chip" onClick={() => executeCliCommand('rman')}>rman</button>
+                                <button type="button" className="terminal-cmd-chip" onClick={() => executeCliCommand('expdp')}>expdp</button>
                                 <button type="button" className="terminal-cmd-chip" onClick={() => executeCliCommand('cv pt')}>curl cv_pt.pdf</button>
                                 <button type="button" className="terminal-cmd-chip" onClick={() => executeCliCommand('cv en')}>curl cv_en.pdf</button>
                                 <button type="button" className="terminal-cmd-chip" onClick={() => executeCliCommand('contact')}>contact</button>
                                 <button type="button" className="terminal-cmd-chip" onClick={() => executeCliCommand('copy email')}>
                                     {copiedEmail ? '✓ email' : 'copy email'}
                                 </button>
-                                <button type="button" className="terminal-cmd-chip" onClick={() => executeCliCommand('arch')}>arch</button>
+                                <button type="button" className="terminal-cmd-chip" onClick={() => executeCliCommand('clear')}>clear</button>
                             </div>
 
-                            {/* Saída do Comando */}
-                            {cliOutput && (
-                                <div className="terminal-cli-response">
-                                    {cliOutput}
+                            {/* Log rolável do Terminal */}
+                            {cliLog.length > 0 && (
+                                <div className="terminal-cli-log" ref={cliLogRef}>
+                                    {cliLog.map((entry, i) => (
+                                        <div key={i} className="terminal-cli-entry">
+                                            <div className="terminal-cli-echo">
+                                                <span className="prompt-green">vini@dba-node-01</span>:<span className="prompt-blue">~</span>$ <span className="prompt-white">{entry.cmd}</span>
+                                            </div>
+                                            <pre className="terminal-cli-out">{entry.out}</pre>
+                                        </div>
+                                    ))}
                                 </div>
                             )}
                         </div>
@@ -803,8 +828,8 @@ const TechHero = () => {
                                     </div>
                                     <p className="career-desc">
                                         {language === 'pt'
-                                            ? 'Atuação direta na administração de Oracle Database (19c/21c), execução de migrações complexas de banco de dados, sustentação de alta disponibilidade (99.98% SLA), backup/restore, disaster recovery, análise de execution plans e automação com Python e Shell Scripting.'
-                                            : 'Direct administration of Oracle Database (19c/21c), complex database migrations, high availability (99.98% SLA), backup/restore, disaster recovery, execution plan analysis, and CI/CD automation with Python and Shell.'}
+                                            ? 'Administração de Oracle Database (19c/21c, Multitenant CDB/PDB), Disaster Recovery com RMAN (backups Full/Incremental, Archivelogs, Point-in-Time Recovery de PDB, RESTORE/RECOVER VALIDATE), migrações e clonagens com Data Pump (expdp/impdp, REMAP_SCHEMA), alta disponibilidade (99.98% SLA), tuning via AWR/ASH e automação Linux em Bash e Python.'
+                                            : 'Oracle Database (19c/21c, Multitenant CDB/PDB) administration, Disaster Recovery with RMAN (Full/Incremental backups, Archivelogs, PDB Point-in-Time Recovery, RESTORE/RECOVER VALIDATE), migrations and cloning with Data Pump (expdp/impdp, REMAP_SCHEMA), high availability (99.98% SLA), AWR/ASH tuning, and Linux automation in Bash and Python.'}
                                     </p>
                                 </div>
 

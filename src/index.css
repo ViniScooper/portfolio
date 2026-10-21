@@ -2152,4 +2152,41 @@ h4 {
     flex-direction: column;
     gap: 0.15rem;
   }
-}
+}
+
+/* ===== LOG ROLÁVEL DO TERMINAL (estilo shell real) ===== */
+.terminal-cli-log {
+  margin-top: 0.55rem;
+  max-height: 300px;
+  overflow-y: auto;
+  padding: 0.55rem 0.7rem;
+  background: #05090b;
+  border: 1px solid rgba(32, 214, 199, 0.15);
+  border-radius: 4px;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+  font-size: 0.74rem;
+  line-height: 1.5;
+  scroll-behavior: smooth;
+  box-shadow: inset 0 0 24px rgba(32, 214, 199, 0.04);
+}
+
+.terminal-cli-log::-webkit-scrollbar { width: 6px; }
+.terminal-cli-log::-webkit-scrollbar-thumb { background: rgba(32, 214, 199, 0.3); border-radius: 3px; }
+
+.terminal-cli-entry + .terminal-cli-entry { margin-top: 0.6rem; }
+
+.terminal-cli-echo { color: #e5e7eb; }
+
+.terminal-cli-out {
+  margin: 0.2rem 0 0;
+  color: #cbd5e1;
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-family: inherit;
+  font-size: inherit;
+  text-shadow: 0 0 6px rgba(32, 214, 199, 0.08);
+}
+
+@media (max-width: 640px) {
+  .terminal-cli-log { max-height: 240px; font-size: 0.66rem; }
+}
